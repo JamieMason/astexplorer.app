@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
   "bugs": "https://github.com/JamieMason/astexplorer.app/issues",
+  "devDependencies": {
+    "electron": "4.0.4"
+  },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
   "keywords": [],
   "license": "MIT",
-  "main": "index.js",
+  "main": "main.js",
   "repository": "JamieMason/astexplorer.app.git",
   "scripts": {
-    "pull-upstream": "./scripts/pull-upstream.sh"
+    "pull-upstream": "./scripts/pull-upstream.sh",
+    "start": "electron ."
   }
 }
