@@ -1,0 +1,53 @@
+.tree-visualization {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.tree-visualization > .toolbar {
+  padding: 5px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.tree-visualization > .toolbar > label {
+  cursor: pointer;
+  margin-right: 5px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+}
+
+.tree-visualization ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tree-visualization > ul {
+  cursor: default;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: monospace;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.tree-visualization .value-body {
+  min-width: 300px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
