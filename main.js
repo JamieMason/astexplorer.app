@@ -5,15 +5,8 @@ let win;
 
 const createWindow = () => {
   const { height, width } = electron.screen.getPrimaryDisplay().workAreaSize;
-
   win = new BrowserWindow({ center: true, height, width });
   win.loadFile('./website/index.html');
-  win.webContents.openDevTools();
-
-  win.webContents.on('did-finish-load', () => {
-    console.log('READY');
-  });
-
   win.on('closed', () => {
     win = null;
   });
