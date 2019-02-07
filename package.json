@@ -1,0 +1,15 @@
+{
+  "name": "astexplorer.app",
+  "description": "AST Explorer (https://astexplorer.net) with Desktop Integration",
+  "version": "0.0.0",
+  "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
+  "bugs": "https://github.com/JamieMason/astexplorer.app/issues",
+  "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "JamieMason/astexplorer.app.git",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
