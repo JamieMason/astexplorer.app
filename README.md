@@ -19,7 +19,7 @@ or [ESLint Plugin](https://eslint.org/docs/developer-guide/working-with-plugins)
 from the comfort of your favourite Editor and your changes will be hot reloaded
 in AST Explorer.
 
-<center><img src="./static/screenshot.png"></center>
+<center><img src="./static/astexplorer-app.gif"></center>
 
 ## Status
 
