@@ -9,9 +9,11 @@ let win;
 let sourceWatcher;
 let transformWatcher;
 
-const rootPath = __dirname;
+const rootPath = path.resolve(__dirname, '..');
 const sourcePath = path.resolve(rootPath, './test/source.js');
 const transformPath = path.resolve(rootPath, './test/transform.js');
+const uiPath = path.resolve(rootPath, './website/index.html');
+const clientScriptPath = path.resolve(__dirname, './inject.js');
 
 const sendSourceToBrowser = () => {
   const sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
@@ -24,9 +26,10 @@ const sendTransformToBrowser = () => {
 };
 
 const unwatch = () => {
-  sourceWatcher && sourceWatcher.close();
-  transformWatcher && transformWatcher.close();
-  sourceWatcher = transformWatcher = null;
+  if (sourceWatcher) sourceWatcher.close();
+  sourceWatcher = null;
+  if (transformWatcher) transformWatcher.close();
+  transformWatcher = null;
 };
 
 const watch = () => {
@@ -41,10 +44,19 @@ const watch = () => {
 
 const createWindow = () => {
   const { height, width } = electron.screen.getPrimaryDisplay().workAreaSize;
-  win = new BrowserWindow({ center: true, height, width });
-  win.loadFile('./website/index.html');
-  win.on('closed', () => (win = null));
-  win.webContents.openDevTools({ mode: 'right' });
+  win = new BrowserWindow({
+    center: true,
+    height,
+    webPreferences: {
+      nodeIntegration: true,
+      preload: clientScriptPath,
+    },
+    width,
+  });
+  win.loadFile(uiPath);
+  win.on('closed', () => {
+    win = null;
+  });
 };
 
 const onWindowReady = () => {

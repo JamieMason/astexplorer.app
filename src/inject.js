@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* eslint no-underscore-dangle: "off" */
+
 const { ipcRenderer } = require('electron');
 
 const getReduxStore = () =>
@@ -6,8 +9,8 @@ const getReduxStore = () =>
 
 const enableAllTreeOptions = () => {
   [...document.querySelectorAll('.tree-visualization [type="checkbox"]')]
-    .filter((el) => !el.checked)
-    .forEach((el) => el.click());
+    .filter(el => !el.checked)
+    .forEach(el => el.click());
 };
 
 const setTransform = (id) => {
@@ -21,7 +24,7 @@ const run = () => {
     reduxStore.dispatch({
       type: 'SET_CODE',
       code: sourceData,
-      cursor: 0
+      cursor: 0,
     });
   });
 
@@ -29,7 +32,7 @@ const run = () => {
     reduxStore.dispatch({
       type: 'SET_TRANSFORM',
       code: transformData,
-      cursor: 0
+      cursor: 0,
     });
   });
 

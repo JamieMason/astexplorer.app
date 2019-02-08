@@ -3,20 +3,66 @@
   "description": "AST Explorer (https://astexplorer.net) with Desktop Integration",
   "version": "0.0.0",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
-  "bugs": "https://github.com/JamieMason/astexplorer.app/issues",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn"
+      },
+      "electronWinstallerConfig": {
+        "name": "astexplorer"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "JamieMason",
+        "name": "astexplorer.app"
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "astexplorer"
+      }
+    }
+  },
   "dependencies": {
-    "chokidar": "2.1.0"
+    "chokidar": "2.1.0",
+    "electron-compile": "6.4.4",
+    "electron-squirrel-startup": "1.0.0"
   },
   "devDependencies": {
-    "electron": "4.0.4"
+    "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "electron-forge": "5.2.4",
+    "electron-prebuilt-compile": "4.0.0",
+    "eslint": "^3",
+    "eslint-config-airbnb": "^15",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jsx-a11y": "^5",
+    "eslint-plugin-react": "^7"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
   "keywords": [],
   "license": "MIT",
-  "main": "main.js",
-  "repository": "JamieMason/astexplorer.app.git",
+  "main": "src/index.js",
+  "productName": "AST Explorer",
   "scripts": {
+    "lint": "eslint src --color",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "publish": "electron-forge publish",
     "pull-upstream": "./scripts/pull-upstream.sh",
-    "start": "electron ."
+    "start": "electron-forge start"
   }
 }
