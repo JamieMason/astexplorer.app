@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
   "bugs": "https://github.com/JamieMason/astexplorer.app/issues",
+  "dependencies": {
+    "chokidar": "2.1.0"
+  },
   "devDependencies": {
     "electron": "4.0.4"
   },

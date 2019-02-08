@@ -1,24 +1,43 @@
-const fs = require('fs');
-const path = require('path');
+const { ipcRenderer } = require('electron');
 
-const websitePath = __dirname;
-const rootPath = path.resolve(websitePath, '..');
-const sourcePath = path.resolve(rootPath, './test/source.js');
-const transformPath = path.resolve(rootPath, './test/transform.js');
+const getReduxStore = () =>
+  document.getElementById('container')._reactRootContainer._internalRoot.current
+    .child.memoizedProps.store;
 
-const sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
-const transformData = fs.readFileSync(transformPath, { encoding: 'utf8' });
-
-const defaults = {
-  parserPerCategory: { javascript: 'babylon7' },
-  parserSettings: {},
-  showTransformPanel: true,
-  workbench: {
-    code: sourceData,
-    keyMap: 'sublime',
-    parser: 'babylon7',
-    transform: { code: transformData, transformer: 'babelv7' }
-  }
+const enableAllTreeOptions = () => {
+  [...document.querySelectorAll('.tree-visualization [type="checkbox"]')]
+    .filter((el) => !el.checked)
+    .forEach((el) => el.click());
 };
 
-localStorage.setItem('explorerSettingsV1', JSON.stringify(defaults));
+const setTransform = (id) => {
+  document.querySelector(`[value="${id}"]`).click();
+};
+
+const run = () => {
+  let reduxStore;
+
+  ipcRenderer.on('source-change-on-disk', (event, sourceData) => {
+    reduxStore.dispatch({
+      type: 'SET_CODE',
+      code: sourceData,
+      cursor: 0
+    });
+  });
+
+  ipcRenderer.on('transform-change-on-disk', (event, transformData) => {
+    reduxStore.dispatch({
+      type: 'SET_TRANSFORM',
+      code: transformData,
+      cursor: 0
+    });
+  });
+
+  ipcRenderer.send('source-change-in-browser', 'TODO sourceData');
+
+  reduxStore = getReduxStore();
+  setTransform('babelv7');
+  enableAllTreeOptions();
+};
+
+window.addEventListener('load', run, false);
