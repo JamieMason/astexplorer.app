@@ -16,16 +16,15 @@ Edit your
 [Babel Plugin](https://babeljs.io/docs/en/plugins/#plugin-development),
 [Codemod](https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb),
 or [ESLint Plugin](https://eslint.org/docs/developer-guide/working-with-plugins)
-from the comfort of your favourite Editor and have your changes hot reload in
-AST Explorer.
+from the comfort of your favourite Editor and your changes will be hot reloaded
+in AST Explorer.
 
 <center><img src="./static/screenshot.png"></center>
 
 ## Status
 
-Working as expected but some steps which could be automated or configurable are
-currently manual steps. At the time of writing this project is only a few hours
-old.
+New Project, some steps which could be automated or configurable currently need
+to be done manually.
 
 ## Usage
 
@@ -36,24 +35,28 @@ yarn install
 yarn start
 ```
 
-This early version is hardcoded to watch for changes to `/test/source.js` and
-`/test/transform.js`. Edit these files in VS Code for example and have
-ASTExplorer.app visible on a separate monitor. Each time you save a file AST
-Explorer will update.
+In this early version, the files you edit on disk are hard-coded at
+`/test/source.js` and `/test/transform.js`. Edit these files in your Editor and
+have ASTExplorer.app visible on a separate monitor. Each time you save a file
+ASTExplorer.app will update.
+
+Editing within ASTExplorer.app is not saved to disk, all editing should be done
+from your Editor of choice such as VS Code or Sublime Text.
 
 ## Contributing
 
 The Web UI used on https://astexplorer.net is built from source from its
 repository at https://github.com/fkling/astexplorer and checked into this
-repository at `/website` using the command `yarn run pull-upstream`. The UI is
-unmodified except for adding `<script src="../inject.js"></script>` to
-`/website/index.html`.
+repository at `/website` using the command `yarn run pull-upstream`.
 
-The `/website` directory is then wrapped in an Electron app to provide Desktop
-Integration. `/main.js` launches the UI then watches the source and transform
-files using [chokidar](https://github.com/paulmillr/chokidar). When these files
-change, a message is sent to the UI using
-[`ipcMain`](https://electronjs.org/docs/api/ipc-main), `/inject.js` listens for
-these messages using
-[`ipcRenderer`](https://electronjs.org/docs/api/ipc-renderer) then forwards the
-changes to AST Explorer's Redux Store.
+When the App is started:
+
+1. `/src/index.js` launches `/website/index.html` using
+   [Electron](https://electronjs.org/).
+1. `/src/index.js` watches for changes to the source and transform files using
+   [chokidar](https://github.com/paulmillr/chokidar).
+1. When these files change, a message is sent to the UI using
+   [`ipcMain`](https://electronjs.org/docs/api/ipc-main).
+1. `/src/inject.js` listens for messages frpm `/src/index.js` using
+   [`ipcRenderer`](https://electronjs.org/docs/api/ipc-renderer) then forwards
+   the changes to AST Explorer's Redux Store.
