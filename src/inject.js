@@ -3,6 +3,19 @@
 
 const { ipcRenderer } = require('electron');
 
+const disableDragAndDrop = () => {
+  const addEventListener = HTMLElement.prototype.addEventListener;
+  Object.defineProperties(HTMLElement.prototype, {
+    addEventListener: {
+      value(type, ...params) {
+        return !type.startsWith('drag')
+          ? addEventListener.call(this, type, ...params)
+          : null;
+      },
+    },
+  });
+};
+
 const getReduxStore = () =>
   document.getElementById('container')._reactRootContainer._internalRoot.current
     .child.memoizedProps.store;
@@ -42,5 +55,7 @@ const run = () => {
   setTransform('babelv7');
   enableAllTreeOptions();
 };
+
+disableDragAndDrop();
 
 window.addEventListener('load', run, false);
