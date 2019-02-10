@@ -10,22 +10,27 @@
 [![Follow JamieMason on GitHub](https://img.shields.io/github/followers/JamieMason.svg?style=social&label=Follow)](https://github.com/JamieMason)
 [![Follow fold_left on Twitter](https://img.shields.io/twitter/follow/fold_left.svg?style=social&label=Follow)](https://twitter.com/fold_left)
 
-## Overview
+## 🗒 Overview
 
 Everything you love about https://astexplorer.net plus:
 
-💻 Edit Transforms in VS Code, Sublime Text etc.<br>📦 Organise Transforms
-using ES Modules.<br>🔥 Hot Reload AST Explorer on file change.<br>🔌 Work
-Offline.
+✅ Hot Reloading.<br>
+✅ Support for ES Modules in your Transforms.<br>
+✅ Edit Transforms in your IDE.<br>
+✅ Work Offline.
 
-<center><img src="./static/astexplorer-app.gif?raw=true"></center>
+## 📸 Screenshot
 
-## Status
+<center><img src="./static/screenshot.png?raw=true"></center>
 
-New Project, some steps which could be automated or configurable currently need
-to be done manually.
+## 🧐 Status
 
-## Usage
+New Project, there will likely be a few kinks to iron out.
+
+## 🌩 Installation
+
+The App will soon be distributed as an Executable App but for the moment is
+built manually.
 
 ```
 git clone https://github.com/JamieMason/astexplorer.app.git astexplorer-app
@@ -34,15 +39,16 @@ yarn install
 yarn start
 ```
 
-In this early version, the files you edit on disk are hard-coded at
-`/test/source.js` and `/test/transform.js`. Edit these files in your Editor and
-have ASTExplorer.app visible on a separate monitor. Each time you save a file
-ASTExplorer.app will update.
+## 🕹 Usage
 
-Editing within ASTExplorer.app is not saved to disk, all editing should be done
-from your Editor of choice such as VS Code or Sublime Text.
+1. Open **File > Import Transform**
+1. Browse to your Babel Plugin, ESLint Rule, Codemod etc
+1. Edit your Transform Script in your IDE
+1. Changes will be reloaded automatically
+1. Organise your transform using ES modules and they will be bundled together
+   automatically.
 
-## Contributing
+## ⚙️ Contributing
 
 The Web UI used on https://astexplorer.net is built from source from its
 repository at https://github.com/fkling/astexplorer and checked into this
@@ -52,12 +58,12 @@ When the App is started:
 
 1. `/src/index.js` launches `/website/index.html` using
    [Electron](https://electronjs.org/).
-1. `/src/index.js` watches for changes to the source and transform files using
+1. When a Source or Transform Script are chosen from the File Menu,
+   `/src/index.js` watches for changes using
    [chokidar](https://github.com/paulmillr/chokidar).
-1. When these files change, your transform is bundled using
-   [Rollup](https://rollupjs.org).
-1. Once bundled, your transform source is sent to the UI using
-   [`ipcMain`](https://electronjs.org/docs/api/ipc-main).
+1. When the Source or Transform Script change, their source is sent to the UI
+   using [`ipcMain`](https://electronjs.org/docs/api/ipc-main).
+   - The Transform Script is bundled using [Rollup](https://rollupjs.org).
 1. `/src/inject.js` listens for messages frpm `/src/index.js` using
    [`ipcRenderer`](https://electronjs.org/docs/api/ipc-renderer) then forwards
    the changes to AST Explorer's Redux Store.
