@@ -9,9 +9,8 @@ const { defaultSource, defaultTransform } = require('./lib/default-contents');
 
 const { app, BrowserWindow, ipcMain } = electron;
 
-const rootPath = path.resolve(__dirname, '..');
-const cssPath = path.resolve(rootPath, './src/overrides.css');
-const uiPath = path.resolve(rootPath, './website/index.html');
+const cssPath = path.resolve(__dirname, './overrides.css');
+const uiPath = path.resolve(__dirname, '../website/index.html');
 const clientScriptPath = path.resolve(__dirname, './inject.js');
 
 let sourcePath;

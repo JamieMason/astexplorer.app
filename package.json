@@ -21,8 +21,7 @@
         "ignore": [
           "/scripts",
           "/static",
-          "/test",
-          "/website"
+          "/test"
         ],
         "packageManager": "yarn"
       },
