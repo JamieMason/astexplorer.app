@@ -61,7 +61,21 @@
     "eslint-plugin-react": "^7"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
-  "keywords": [],
+  "keywords": [
+    "ast",
+    "ast-explorer",
+    "babel",
+    "babel-plugin",
+    "codemod",
+    "codemods",
+    "electron",
+    "eslint",
+    "eslintplugin",
+    "javascript",
+    "jscodeshift",
+    "parser",
+    "postcss"
+  ],
   "license": "MIT",
   "main": "src/index.js",
   "productName": "AST Explorer",
