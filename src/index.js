@@ -3,11 +3,9 @@ const path = require('path');
 const chokidar = require('chokidar');
 const electron = require('electron');
 
-const { app, BrowserWindow, ipcMain } = electron;
+const { createBundlerFor } = require('./lib/bundle');
 
-let win;
-let sourceWatcher;
-let transformWatcher;
+const { app, BrowserWindow, ipcMain } = electron;
 
 const rootPath = path.resolve(__dirname, '..');
 const sourcePath = path.resolve(rootPath, './test/source.js');
@@ -15,13 +13,18 @@ const transformPath = path.resolve(rootPath, './test/transform.js');
 const uiPath = path.resolve(rootPath, './website/index.html');
 const clientScriptPath = path.resolve(__dirname, './inject.js');
 
+let win;
+let sourceWatcher;
+let transformWatcher;
+
 const sendSourceToBrowser = () => {
   const sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
   win.webContents.send('source-change-on-disk', sourceData);
 };
 
-const sendTransformToBrowser = () => {
-  const transformData = fs.readFileSync(transformPath, { encoding: 'utf8' });
+const sendTransformToBrowser = async () => {
+  const getBundledTransformData = await createBundlerFor(transformPath);
+  const transformData = await getBundledTransformData();
   win.webContents.send('transform-change-on-disk', transformData);
 };
 

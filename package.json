@@ -18,6 +18,12 @@
         ]
       },
       "electronPackagerConfig": {
+        "ignore": [
+          "/scripts",
+          "/static",
+          "/test",
+          "/website"
+        ],
         "packageManager": "yarn"
       },
       "electronWinstallerConfig": {
@@ -38,7 +44,9 @@
   "dependencies": {
     "chokidar": "2.1.0",
     "electron-compile": "6.4.4",
-    "electron-squirrel-startup": "1.0.0"
+    "electron-squirrel-startup": "1.0.0",
+    "memory-fs": "0.4.1",
+    "rollup": "1.1.2"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
