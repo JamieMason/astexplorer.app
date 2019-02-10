@@ -4,31 +4,23 @@ const chokidar = require('chokidar');
 const electron = require('electron');
 
 const { createBundlerFor } = require('./lib/bundle');
+const { createMenu } = require('./lib/create-menu');
+const { defaultSource, defaultTransform } = require('./lib/default-contents');
 
 const { app, BrowserWindow, ipcMain } = electron;
 
 const rootPath = path.resolve(__dirname, '..');
 const cssPath = path.resolve(rootPath, './src/overrides.css');
-const sourcePath = path.resolve(rootPath, './test/source.js');
-const transformPath = path.resolve(rootPath, './test/transform.js');
 const uiPath = path.resolve(rootPath, './website/index.html');
 const clientScriptPath = path.resolve(__dirname, './inject.js');
 
-const cssOverrides = fs.readFileSync(cssPath, { encoding: 'utf8' });
-let win;
+let sourcePath;
 let sourceWatcher;
+let transformPath;
 let transformWatcher;
+let win;
 
-const sendSourceToBrowser = () => {
-  const sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
-  win.webContents.send('source-change-on-disk', sourceData);
-};
-
-const sendTransformToBrowser = async () => {
-  const getBundledTransformData = await createBundlerFor(transformPath);
-  const transformData = await getBundledTransformData();
-  win.webContents.send('transform-change-on-disk', transformData);
-};
+const cssOverrides = fs.readFileSync(cssPath, { encoding: 'utf8' });
 
 const unwatch = () => {
   if (sourceWatcher) sourceWatcher.close();
@@ -38,13 +30,35 @@ const unwatch = () => {
 };
 
 const watch = () => {
+  const sendSourceToBrowser = () => {
+    const sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
+    win.webContents.send('source-change-on-disk', sourceData);
+  };
+
+  const sendTransformToBrowser = async () => {
+    const getBundledTransformData = await createBundlerFor(transformPath);
+    const transformData = await getBundledTransformData();
+    win.webContents.send('transform-change-on-disk', transformData);
+  };
+
   unwatch();
-  sourceWatcher = chokidar
-    .watch(sourcePath, { persistent: true })
-    .on('change', sendSourceToBrowser);
-  transformWatcher = chokidar
-    .watch(transformPath, { persistent: true })
-    .on('change', sendTransformToBrowser);
+
+  if (sourcePath) {
+    sourceWatcher = chokidar
+      .watch(sourcePath, { persistent: true })
+      .on('change', sendSourceToBrowser);
+    sendSourceToBrowser();
+  } else {
+    win.webContents.send('source-change-on-disk', defaultSource);
+  }
+  if (transformPath) {
+    transformWatcher = chokidar
+      .watch(transformPath, { persistent: true })
+      .on('change', sendTransformToBrowser);
+    sendTransformToBrowser();
+  } else {
+    win.webContents.send('transform-change-on-disk', defaultTransform);
+  }
 };
 
 const createWindow = () => {
@@ -71,14 +85,24 @@ const onWindowReady = () => {
 
   win.webContents.insertCSS(cssOverrides);
   watch();
-  sendSourceToBrowser();
-  sendTransformToBrowser();
+};
+
+const onOpenSource = (filePath) => {
+  sourcePath = filePath;
+  watch();
+};
+
+const onOpenTransform = (filePath) => {
+  transformPath = filePath;
+  watch();
 };
 
 app.setName('AST Explorer');
 
 app.on('ready', () => {
+  createMenu({ onOpenSource, onOpenTransform });
   createWindow();
+
   win.webContents.on('did-finish-load', onWindowReady);
 
   app.on('window-all-closed', () => {
