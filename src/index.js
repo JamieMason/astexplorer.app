@@ -91,3 +91,8 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+app.on('quit', () => {
+  win = null;
+  unwatch();
+});
