@@ -1,0 +1,4 @@
+#Toolbar > a[title="Help"],
+#Toolbar > .button.menuButton:nth-of-type(1) {
+  display: none;
+}

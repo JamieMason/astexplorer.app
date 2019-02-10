@@ -8,11 +8,13 @@ const { createBundlerFor } = require('./lib/bundle');
 const { app, BrowserWindow, ipcMain } = electron;
 
 const rootPath = path.resolve(__dirname, '..');
+const cssPath = path.resolve(rootPath, './src/overrides.css');
 const sourcePath = path.resolve(rootPath, './test/source.js');
 const transformPath = path.resolve(rootPath, './test/transform.js');
 const uiPath = path.resolve(rootPath, './website/index.html');
 const clientScriptPath = path.resolve(__dirname, './inject.js');
 
+const cssOverrides = fs.readFileSync(cssPath, { encoding: 'utf8' });
 let win;
 let sourceWatcher;
 let transformWatcher;
@@ -67,6 +69,7 @@ const onWindowReady = () => {
     console.log('received source-change-in-browser:', nextSource);
   });
 
+  win.webContents.insertCSS(cssOverrides);
   watch();
   sendSourceToBrowser();
   sendTransformToBrowser();
@@ -77,22 +80,22 @@ app.setName('AST Explorer');
 app.on('ready', () => {
   createWindow();
   win.webContents.on('did-finish-load', onWindowReady);
-});
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit();
+      unwatch();
+    }
+  });
+
+  app.on('activate', () => {
+    if (win === null) {
+      createWindow();
+    }
+  });
+
+  app.on('quit', () => {
+    win = null;
     unwatch();
-  }
-});
-
-app.on('activate', () => {
-  if (win === null) {
-    createWindow();
-  }
-});
-
-app.on('quit', () => {
-  win = null;
-  unwatch();
+  });
 });
