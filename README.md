@@ -12,14 +12,13 @@
 
 ## Overview
 
-Edit your
-[Babel Plugin](https://babeljs.io/docs/en/plugins/#plugin-development),
-[Codemod](https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb),
-or [ESLint Plugin](https://eslint.org/docs/developer-guide/working-with-plugins)
-from the comfort of your favourite Editor and your changes will be hot reloaded
-in AST Explorer.
+Everything you love about https://astexplorer.net plus:
 
-<center><img src="./static/astexplorer-app.gif"></center>
+💻 Edit Transforms in VS Code, Sublime Text etc.<br>📦 Organise Transforms
+using ES Modules.<br>🔥 Hot Reload AST Explorer on file change.<br>🔌 Work
+Offline.
+
+<center><img src="./static/astexplorer-app.gif?raw=true"></center>
 
 ## Status
 
@@ -29,8 +28,8 @@ to be done manually.
 ## Usage
 
 ```
-git clone https://github.com/JamieMason/astexplorer.app.git
-cd astexplorer.app
+git clone https://github.com/JamieMason/astexplorer.app.git astexplorer-app
+cd astexplorer-app
 yarn install
 yarn start
 ```
@@ -55,7 +54,9 @@ When the App is started:
    [Electron](https://electronjs.org/).
 1. `/src/index.js` watches for changes to the source and transform files using
    [chokidar](https://github.com/paulmillr/chokidar).
-1. When these files change, a message is sent to the UI using
+1. When these files change, your transform is bundled using
+   [Rollup](https://rollupjs.org).
+1. Once bundled, your transform source is sent to the UI using
    [`ipcMain`](https://electronjs.org/docs/api/ipc-main).
 1. `/src/inject.js` listens for messages frpm `/src/index.js` using
    [`ipcRenderer`](https://electronjs.org/docs/api/ipc-renderer) then forwards
