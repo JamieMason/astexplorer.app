@@ -1,6 +1,6 @@
 {
   "name": "astexplorer.app",
-  "description": "AST Explorer (https://astexplorer.net) with Desktop Integration",
+  "description": "https://astexplorer.net with ES Modules support and Hot Reloading",
   "version": "0.0.0",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
   "config": {

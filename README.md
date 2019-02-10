@@ -1,6 +1,6 @@
 # ASTExplorer.app
 
-> AST Explorer (https://astexplorer.net) with Desktop Integration
+> https://astexplorer.net with ES Modules support and Hot Reloading
 
 [![Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JamieMason/astexplorer)
 [![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg)](https://www.paypal.me/foldleft)
