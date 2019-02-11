@@ -52,11 +52,11 @@ yarn start
 
 The Web UI used on https://astexplorer.net is built from source from its
 repository at https://github.com/fkling/astexplorer and checked into this
-repository at `/website` using the command `yarn run pull-upstream`.
+repository at `/vendor` using the command `yarn run pull-upstream`.
 
 When the App is started:
 
-1. `/src/index.js` launches `/website/index.html` using
+1. `/src/index.js` launches `/vendor/index.html` using
    [Electron](https://electronjs.org/).
 1. When a Source or Transform Script are chosen from the File Menu,
    `/src/index.js` watches for changes using
