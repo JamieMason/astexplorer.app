@@ -65,6 +65,7 @@ const createWindow = () => {
   win = new BrowserWindow({
     center: true,
     height,
+    icon: path.resolve(__dirname, '../assets/icons/png/64x64.png'),
     webPreferences: {
       nodeIntegration: true,
       preload: clientScriptPath,

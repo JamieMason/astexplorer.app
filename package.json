@@ -4,41 +4,7 @@
   "version": "0.0.0",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
   "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "ignore": [
-          "/scripts",
-          "/static",
-          "/test"
-        ],
-        "packageManager": "yarn"
-      },
-      "electronWinstallerConfig": {
-        "name": "astexplorer"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "JamieMason",
-        "name": "astexplorer.app"
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "astexplorer"
-      }
-    }
+    "forge": "./forge.config.js"
   },
   "dependencies": {
     "chokidar": "2.1.0",
@@ -57,7 +23,8 @@
     "eslint-config-airbnb": "^15",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^5",
-    "eslint-plugin-react": "^7"
+    "eslint-plugin-react": "^7",
+    "rimraf": "2.6.3"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
   "keywords": [
@@ -79,10 +46,12 @@
   "main": "src/index.js",
   "productName": "AST Explorer",
   "scripts": {
+    "clean": "rimraf ./out",
+    "electron:make": "electron-forge make",
+    "electron:package": "electron-forge package",
     "lint": "eslint src --color",
-    "make": "electron-forge make",
-    "package": "electron-forge package",
-    "publish": "electron-forge publish",
+    "preelectron:make": "yarn clean",
+    "preelectron:package": "yarn clean",
     "pull-upstream": "./scripts/pull-upstream.sh",
     "start": "electron-forge start"
   }
