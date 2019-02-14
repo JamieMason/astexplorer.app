@@ -12,18 +12,15 @@
 
 ## 🗒 Overview
 
-Everything you love about https://astexplorer.net plus:
-
-✅ Hot Reloading.<br>
-✅ Support for ES Modules in your Transforms.<br>
-✅ Edit Transforms in your IDE.<br>
-✅ Work Offline.
+Everything you love about https://astexplorer.net plus:<br><br>✅ Support for ES
+Modules in your Transforms.<br>✅ Edit Transforms in your IDE.<br>✅ Hot
+Reloading.<br>✅ Work Offline.
 
 ## 📸 Screenshot
 
 <center><img src="./static/screenshot.png?raw=true"></center>
 
-## 🧐 Status
+## 🙋🏽 Status
 
 New Project, there will likely be a few kinks to iron out.
 
@@ -67,3 +64,21 @@ When the App is started:
 1. `/src/inject.js` listens for messages frpm `/src/index.js` using
    [`ipcRenderer`](https://electronjs.org/docs/api/ipc-renderer) then forwards
    the changes to AST Explorer's Redux Store.
+
+### Development Scripts
+
+#### `yarn start`
+
+Create and run the App quickly for Development purposes
+[[more info](https://github.com/electron-userland/electron-forge/tree/5.x#launching-your-project)].
+
+#### `yarn run electron:package`
+
+Create the Application on disk.
+[[more info](https://github.com/electron-userland/electron-forge/tree/5.x#packaging-your-project)]
+
+#### `yarn run electron:make`
+
+Create the Application for various Platforms, plus installers, distribution
+packages, etc.
+[[more info](https://github.com/electron-userland/electron-forge/tree/5.x#generating-a-distributable-for-your-project)].
