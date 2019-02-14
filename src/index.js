@@ -117,7 +117,7 @@ app.on('ready', () => {
     }
   });
 
-  app.on('quit', () => {
+  app.on('will-quit', () => {
     win = null;
     unwatch();
   });
