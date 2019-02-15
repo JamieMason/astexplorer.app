@@ -1,4 +1,12 @@
-## 0.9.3 (2019-02-14)
+## [0.9.4](https://github.com/JamieMason/astexplorer.app/compare/0.9.3...0.9.4) (2019-02-15)
+
+### Bug Fixes
+
+- **app:** prevent message on beforeunload from showing
+  ([7d94490](https://github.com/JamieMason/astexplorer.app/commit/7d94490)),
+  closes [#1](https://github.com/JamieMason/astexplorer.app/issues/1)
+
+## [0.9.3](https://github.com/JamieMason/astexplorer.app/compare/a2f1928...0.9.3) (2019-02-14)
 
 ### Bug Fixes
 

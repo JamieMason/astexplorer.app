@@ -1,7 +1,7 @@
 {
   "name": "astexplorer.app",
   "description": "https://astexplorer.net with ES Modules support and Hot Reloading",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
   "config": {
     "forge": "./forge.config.js"
