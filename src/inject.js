@@ -16,6 +16,14 @@ const disableDragAndDrop = () => {
   });
 };
 
+const disableExitDialog = () => {
+  Object.defineProperties(window, {
+    onbeforeunload: {
+      set() {},
+    },
+  });
+};
+
 const getReduxStore = () =>
   document.getElementById('container')._reactRootContainer._internalRoot.current
     .child.memoizedProps.store;
@@ -57,5 +65,6 @@ const run = () => {
 };
 
 disableDragAndDrop();
+disableExitDialog();
 
 window.addEventListener('load', run, false);
