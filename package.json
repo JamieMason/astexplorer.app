@@ -7,11 +7,11 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "chokidar": "2.1.0",
+    "chokidar": "3.0.1",
     "electron-compile": "6.4.4",
     "electron-squirrel-startup": "1.0.0",
     "memory-fs": "0.4.1",
-    "rollup": "1.1.2"
+    "rollup": "1.15.1"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
