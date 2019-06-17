@@ -19,7 +19,7 @@
     "babel-preset-react": "6.24.1",
     "electron-forge": "5.2.4",
     "electron-prebuilt-compile": "4.0.0",
-    "eslint": "^3",
+    "eslint": "^4",
     "eslint-config-airbnb": "^15",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^5",
