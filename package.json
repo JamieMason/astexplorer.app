@@ -11,7 +11,7 @@
     "electron-compile": "6.4.4",
     "electron-squirrel-startup": "1.0.0",
     "memory-fs": "0.4.1",
-    "rollup": "1.15.1"
+    "rollup": "1.15.6"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
