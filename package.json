@@ -7,11 +7,11 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "chokidar": "3.0.1",
+    "chokidar": "3.0.2",
     "electron-compile": "6.4.4",
     "electron-squirrel-startup": "1.0.0",
     "memory-fs": "0.4.1",
-    "rollup": "1.15.1"
+    "rollup": "1.18.0"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
@@ -19,10 +19,10 @@
     "babel-preset-react": "6.24.1",
     "electron-forge": "5.2.4",
     "electron-prebuilt-compile": "4.0.0",
-    "eslint": "^3",
-    "eslint-config-airbnb": "^15",
+    "eslint": "^6",
+    "eslint-config-airbnb": "^17",
     "eslint-plugin-import": "^2",
-    "eslint-plugin-jsx-a11y": "^5",
+    "eslint-plugin-jsx-a11y": "^6",
     "eslint-plugin-react": "^7",
     "rimraf": "2.6.3"
   },
@@ -45,6 +45,9 @@
   "license": "MIT",
   "main": "src/index.js",
   "productName": "AST Explorer",
+  "resolutions": {
+    "lodash": ">=4.17.15"
+  },
   "scripts": {
     "clean": "rimraf ./out",
     "electron:make": "electron-forge make",
