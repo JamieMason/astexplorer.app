@@ -2,15 +2,10 @@
 
 > https://astexplorer.net with ES Modules support and Hot Reloading
 
-[![Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JamieMason/astexplorer)
-[![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg)](https://www.paypal.me/foldleft)
-[![Backers](https://opencollective.com/fold_left/backers/badge.svg)](https://opencollective.com/fold_left#backer)
-[![Sponsors](https://opencollective.com/fold_left/sponsors/badge.svg)](https://opencollective.com/fold_left#sponsors)
-[![Analytics](https://ga-beacon.appspot.com/UA-45466560-5/astexplorer?flat&useReferer)](https://github.com/igrigorik/ga-beacon)
 [![Follow JamieMason on GitHub](https://img.shields.io/github/followers/JamieMason.svg?style=social&label=Follow)](https://github.com/JamieMason)
 [![Follow fold_left on Twitter](https://img.shields.io/twitter/follow/fold_left.svg?style=social&label=Follow)](https://twitter.com/fold_left)
 
-## 🗒 Overview
+## 📣 Summary
 
 Everything you love about https://astexplorer.net plus:<br><br>✅ Support for ES
 Modules in your Transforms.<br>✅ Edit Transforms in your IDE.<br>✅ Hot
@@ -110,3 +105,10 @@ packages, etc.
 1. Attach `./out/make/ASTExplorer-x.x.x.dmg` and
    `./out/ASTExplorer-darwin-x64-x.x.x`.
 1. Publish the release.
+
+## 🙋🏾‍♀️ Getting Help
+
+- Get help with issues by creating a
+  [Bug Report](https://github.com/JamieMason/astexplorer-app/issues/new?template=bug_report.md).
+- Discuss ideas by opening a
+  [Feature Request](https://github.com/JamieMason/astexplorer-app/issues/new?template=feature_request.md).
