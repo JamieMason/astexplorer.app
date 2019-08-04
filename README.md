@@ -24,9 +24,9 @@ New Project, there will likely be a few kinks to iron out.
 ### Mac
 
 📦
-[ASTExplorer-0.11.4.dmg](https://github.com/JamieMason/astexplorer.app/releases/download/0.11.4/ASTExplorer-0.11.4.dmg)<br>
+[ASTExplorer-0.12.4.dmg](https://github.com/JamieMason/astexplorer.app/releases/download/0.12.4/ASTExplorer-0.12.4.dmg)<br>
 📦
-[ASTExplorer-darwin-x64-0.11.4.zip](https://github.com/JamieMason/astexplorer.app/releases/download/0.11.4/ASTExplorer-darwin-x64-0.11.4.zip)
+[ASTExplorer-darwin-x64-0.12.4.zip](https://github.com/JamieMason/astexplorer.app/releases/download/0.12.4/ASTExplorer-darwin-x64-0.12.4.zip)
 
 ### Build From Source
 
@@ -109,6 +109,6 @@ packages, etc.
 ## 🙋🏾‍♀️ Getting Help
 
 - Get help with issues by creating a
-  [Bug Report](https://github.com/JamieMason/astexplorer-app/issues/new?template=bug_report.md).
+  [Bug Report](https://github.com/JamieMason/astexplorer.app/issues/new?template=bug_report.md).
 - Discuss ideas by opening a
-  [Feature Request](https://github.com/JamieMason/astexplorer-app/issues/new?template=feature_request.md).
+  [Feature Request](https://github.com/JamieMason/astexplorer.app/issues/new?template=feature_request.md).

@@ -1,3 +1,10 @@
+## [0.12.4](https://github.com/JamieMason/astexplorer.app/compare/0.11.4...0.12.4) (2019-08-04)
+
+### Features
+
+- **astexplorer:** pull latest astexplorer.net
+  ([639a3fc](https://github.com/JamieMason/astexplorer.app/commit/639a3fc))
+
 ## [0.11.4](https://github.com/JamieMason/astexplorer.app/compare/0.10.4...0.11.4) (2019-06-12)
 
 ### Features
