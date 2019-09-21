@@ -63,6 +63,7 @@
     "clean": "rimraf ./out",
     "electron:make": "electron-forge make",
     "electron:package": "electron-forge package",
+    "format": "prettier --write './src/**/*.js'",
     "lint": "eslint src --color",
     "preelectron:make": "yarn clean",
     "preelectron:package": "yarn clean",

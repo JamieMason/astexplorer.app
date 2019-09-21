@@ -24,8 +24,9 @@ const disableExitDialog = () => {
   });
 };
 
-const getReduxStore = () => document.getElementById('container')._reactRootContainer._internalRoot.current
-  .child.memoizedProps.store;
+const getReduxStore = () =>
+  document.getElementById('container')._reactRootContainer._internalRoot.current
+    .child.memoizedProps.store;
 
 const enableAllTreeOptions = () => {
   [...document.querySelectorAll('.tree-visualization [type="checkbox"]')]

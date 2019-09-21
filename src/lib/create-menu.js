@@ -1,6 +1,4 @@
-const {
-  app, dialog, Menu, shell,
-} = require('electron');
+const { app, dialog, Menu, shell } = require('electron');
 
 const createOpenMenuItem = (label, onOpen) => ({
   label,
