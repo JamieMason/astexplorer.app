@@ -1,2 +1,4 @@
-node_modules
-out
+/node_modules
+/out
+/vendor/astexplorer/out
+/vendor/astexplorer/website/node_modules

@@ -3,9 +3,7 @@
 REPO="$PWD"
 rm -rf "$REPO/astexplorer"
 git clone https://github.com/fkling/astexplorer.git
-cd "$REPO/astexplorer/website"
-yarn install
-yarn build
 rm -rf "$REPO/vendor"
-mv "$REPO/astexplorer/out" "$REPO/vendor"
+mkdir -p "$REPO/vendor/astexplorer"
+mv "$REPO/astexplorer/website" "$REPO/vendor/astexplorer"
 rm -rf "$REPO/astexplorer"

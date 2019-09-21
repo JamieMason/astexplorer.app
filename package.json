@@ -60,6 +60,7 @@
     "uglify-js": ">=2.6.0"
   },
   "scripts": {
+    "build-upstream": "./scripts/build-upstream.sh",
     "clean": "rimraf ./out",
     "electron:make": "electron-forge make",
     "electron:package": "electron-forge package",

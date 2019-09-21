@@ -14,7 +14,7 @@ const { defaultSource, defaultTransform } = require('./lib/default-contents');
 const { app, BrowserWindow, ipcMain } = electron;
 
 const cssPath = path.resolve(__dirname, './overrides.css');
-const uiPath = path.resolve(__dirname, '../vendor/index.html');
+const uiPath = path.resolve(__dirname, '../vendor/astexplorer/out/index.html');
 const clientScriptPath = path.resolve(__dirname, './inject.js');
 
 let sourcePath;
