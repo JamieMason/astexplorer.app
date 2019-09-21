@@ -29,8 +29,8 @@ const getReduxStore = () => document.getElementById('container')._reactRootConta
 
 const enableAllTreeOptions = () => {
   [...document.querySelectorAll('.tree-visualization [type="checkbox"]')]
-    .filter(el => !el.checked)
-    .forEach(el => el.click());
+    .filter((el) => !el.checked)
+    .forEach((el) => el.click());
 };
 
 const setTransform = (id) => {
