@@ -7,11 +7,11 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "chokidar": "3.0.2",
+    "chokidar": "3.1.1",
     "electron-compile": "6.4.4",
     "electron-squirrel-startup": "1.0.0",
     "memory-fs": "0.4.1",
-    "rollup": "1.18.0"
+    "rollup": "1.21.4"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
@@ -20,11 +20,11 @@
     "electron-forge": "5.2.4",
     "electron-prebuilt-compile": "4.0.0",
     "eslint": "^6",
-    "eslint-config-airbnb": "^17",
+    "eslint-config-airbnb": "^18",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^6",
     "eslint-plugin-react": "^7",
-    "rimraf": "2.6.3"
+    "rimraf": "3.0.0"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
   "keywords": [
