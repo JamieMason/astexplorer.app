@@ -46,7 +46,17 @@
   "main": "src/index.js",
   "productName": "AST Explorer",
   "resolutions": {
-    "lodash": ">=4.17.15"
+    "clean-css": ">=4.1.11",
+    "constantinople": ">=3.1.1",
+    "cryptiles": ">=4.1.2",
+    "hoek": ">=5.0.3",
+    "js-yaml": ">=3.13.1",
+    "lodash": ">=4.17.15",
+    "mem": ">=4.0.0",
+    "mime": ">=2.0.3",
+    "minimatch": ">=3.0.2",
+    "semver": ">=4.3.2",
+    "uglify-js": ">=2.6.0"
   },
   "scripts": {
     "clean": "rimraf ./out",
