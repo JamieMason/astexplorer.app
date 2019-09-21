@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const chokidar = require('chokidar');
 const electron = require('electron');
+const {
+  default: installExtension,
+  REDUX_DEVTOOLS,
+} = require('electron-devtools-installer');
 
 const { createBundlerFor } = require('./lib/bundle');
 const { createMenu } = require('./lib/create-menu');
@@ -100,26 +104,30 @@ const onOpenTransform = (filePath) => {
 app.setName('AST Explorer');
 
 app.on('ready', () => {
-  createMenu({ onOpenSource, onOpenTransform });
-  createWindow();
-
-  win.webContents.on('did-finish-load', onWindowReady);
-
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-      app.quit();
-      unwatch();
-    }
-  });
-
-  app.on('activate', () => {
-    if (win === null) {
+  installExtension(REDUX_DEVTOOLS)
+    .then(() => {
+      createMenu({ onOpenSource, onOpenTransform });
       createWindow();
-    }
-  });
 
-  app.on('will-quit', () => {
-    win = null;
-    unwatch();
-  });
+      win.webContents.on('did-finish-load', onWindowReady);
+
+      app.on('window-all-closed', () => {
+        if (process.platform !== 'darwin') {
+          app.quit();
+          unwatch();
+        }
+      });
+
+      app.on('activate', () => {
+        if (win === null) {
+          createWindow();
+        }
+      });
+
+      app.on('will-quit', () => {
+        win = null;
+        unwatch();
+      });
+    })
+    .catch((err) => console.log('Failed to install Redux DevTools: ', err));
 });
