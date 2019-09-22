@@ -9,6 +9,10 @@ mv "$REPO/astexplorer/website" "$REPO/vendor/astexplorer"
 rm -rf "$REPO/astexplorer"
 
 # apply patches
-TRANFORM_PATH="$REPO/scripts/transforms/insert-middleware.js"
 ENTRY_FILE="$REPO/vendor/astexplorer/website/src/app.js"
-jscodeshift --parser flow --extensions js -t "$TRANFORM_PATH" "$ENTRY_FILE"
+DISABLE_DRAG_AND_DROP="$REPO/scripts/transforms/disable-drag-and-drop.js"
+DISABLE_EXIT_DIALOG="$REPO/scripts/transforms/disable-exit-dialog.js"
+INSERT_MIDDLEWARE="$REPO/scripts/transforms/insert-middleware.js"
+jscodeshift --parser flow --extensions js -t "$DISABLE_DRAG_AND_DROP" "$ENTRY_FILE"
+jscodeshift --parser flow --extensions js -t "$DISABLE_EXIT_DIALOG" "$ENTRY_FILE"
+jscodeshift --parser flow --extensions js -t "$INSERT_MIDDLEWARE" "$ENTRY_FILE"

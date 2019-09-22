@@ -4,7 +4,6 @@ import CodeEditorContainer from './containers/CodeEditorContainer';
 import ErrorMessageContainer from './containers/ErrorMessageContainer';
 import GistBanner from './components/GistBanner';
 import LoadingIndicatorContainer from './containers/LoadingIndicatorContainer';
-import PasteDropTargetContainer from './containers/PasteDropTargetContainer';
 import PropTypes from 'prop-types';
 import PubSub from 'pubsub-js';
 import React from 'react';
@@ -38,27 +37,27 @@ function App(props) {
     <div>
       <ErrorMessageContainer />
       <div className={'dropTarget' + (props.hasError ? ' hasError' : '')}>
-        <PasteDropTargetContainer>
-        <LoadingIndicatorContainer />
-        <SettingsDialogContainer />
-        <ShareDialogContainer />
-        <div id="root">
-          <ToolbarContainer />
-          <GistBanner />
-          <SplitPane
-            className="splitpane-content"
-            vertical={true}
-            onResize={resize}>
+        <React.Fragment>
+          <LoadingIndicatorContainer />
+          <SettingsDialogContainer />
+          <ShareDialogContainer />
+          <div id="root">
+            <ToolbarContainer />
+            <GistBanner />
             <SplitPane
-              className="splitpane"
+              className="splitpane-content"
+              vertical={true}
               onResize={resize}>
-              <CodeEditorContainer />
-              <ASTOutputContainer />
+              <SplitPane
+                className="splitpane"
+                onResize={resize}>
+                <CodeEditorContainer />
+                <ASTOutputContainer />
+              </SplitPane>
+              {props.showTransformer ? <TransformerContainer /> : null}
             </SplitPane>
-            {props.showTransformer ? <TransformerContainer /> : null}
-          </SplitPane>
-        </div>
-        </PasteDropTargetContainer>
+          </div>
+        </React.Fragment>
       </div>
     </div>
   );
@@ -109,10 +108,3 @@ global.onhashchange = () => {
 if (location.hash.length > 1) {
   store.dispatch(loadSnippet());
 }
-
-global.onbeforeunload = () => {
-  const state = store.getState();
-  if (canSaveTransform(state)) {
-    return 'You have unsaved transform code. Do you really want to leave?';
-  }
-};
