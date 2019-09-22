@@ -25,6 +25,7 @@
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^6",
     "eslint-plugin-react": "^7",
+    "jscodeshift": "0.6.4",
     "rimraf": "3.0.0"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
@@ -68,7 +69,8 @@
     "lint": "eslint src --color",
     "preelectron:make": "yarn clean",
     "preelectron:package": "yarn clean",
+    "prestart": "yarn build-upstream",
     "pull-upstream": "./scripts/pull-upstream.sh",
-    "start": "electron-forge start"
+    "start": "NODE_ENV=development electron-forge start"
   }
 }

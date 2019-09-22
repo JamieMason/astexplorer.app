@@ -82,7 +82,7 @@ const store = createStore(
   enableBatching(astexplorer),
   revive(LocalStorage.readState()),
   composeEnhancers(
-    applyMiddleware(sagaMiddleware, parserMiddleware)
+    applyMiddleware(window.__AST_EXPLORER_APP_MIDDLEWARE__, sagaMiddleware, parserMiddleware)
   )
 );
 store.subscribe(debounce(() => {

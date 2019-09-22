@@ -2,10 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const chokidar = require('chokidar');
 const electron = require('electron');
-const {
-  default: installExtension,
-  REDUX_DEVTOOLS,
-} = require('electron-devtools-installer');
+const devtoolsInstaller = require('electron-devtools-installer');
 
 const { createBundlerFor } = require('./lib/bundle');
 const { createMenu } = require('./lib/create-menu');
@@ -19,8 +16,10 @@ const clientScriptPath = path.resolve(__dirname, './inject.js');
 
 let sourcePath;
 let sourceWatcher;
+let sourceData;
 let transformPath;
 let transformWatcher;
+let transformData;
 let win;
 
 const cssOverrides = fs.readFileSync(cssPath, { encoding: 'utf8' });
@@ -28,19 +27,23 @@ const cssOverrides = fs.readFileSync(cssPath, { encoding: 'utf8' });
 const unwatch = () => {
   if (sourceWatcher) sourceWatcher.close();
   sourceWatcher = null;
+  sourceData = '';
+  win.webContents.send('source-change-on-disk', sourceData);
   if (transformWatcher) transformWatcher.close();
   transformWatcher = null;
+  transformData = '';
+  win.webContents.send('transform-change-on-disk', transformData);
 };
 
 const watch = () => {
   const sendSourceToBrowser = () => {
-    const sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
+    sourceData = fs.readFileSync(sourcePath, { encoding: 'utf8' });
     win.webContents.send('source-change-on-disk', sourceData);
   };
 
   const sendTransformToBrowser = async () => {
     const getBundledTransformData = await createBundlerFor(transformPath);
-    const transformData = await getBundledTransformData();
+    transformData = await getBundledTransformData();
     win.webContents.send('transform-change-on-disk', transformData);
   };
 
@@ -80,6 +83,9 @@ const createWindow = () => {
   win.on('closed', () => {
     win = null;
   });
+  if (process.env.NODE_ENV === 'development') {
+    win.webContents.openDevTools({ mode: 'right' });
+  }
 };
 
 const onWindowReady = () => {
@@ -103,31 +109,33 @@ const onOpenTransform = (filePath) => {
 
 app.setName('AST Explorer');
 
-app.on('ready', () => {
-  installExtension(REDUX_DEVTOOLS)
-    .then(() => {
-      createMenu({ onOpenSource, onOpenTransform });
+app.on('ready', async () => {
+  if (process.env.NODE_ENV === 'development') {
+    const { default: installExtension } = devtoolsInstaller;
+    const { REDUX_DEVTOOLS } = devtoolsInstaller;
+    await installExtension(REDUX_DEVTOOLS);
+  }
+
+  createMenu({ onOpenSource, onOpenTransform });
+  createWindow();
+
+  win.webContents.on('did-finish-load', onWindowReady);
+
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit();
+      unwatch();
+    }
+  });
+
+  app.on('activate', () => {
+    if (win === null) {
       createWindow();
+    }
+  });
 
-      win.webContents.on('did-finish-load', onWindowReady);
-
-      app.on('window-all-closed', () => {
-        if (process.platform !== 'darwin') {
-          app.quit();
-          unwatch();
-        }
-      });
-
-      app.on('activate', () => {
-        if (win === null) {
-          createWindow();
-        }
-      });
-
-      app.on('will-quit', () => {
-        win = null;
-        unwatch();
-      });
-    })
-    .catch((err) => console.log('Failed to install Redux DevTools: ', err));
+  app.on('will-quit', () => {
+    win = null;
+    unwatch();
+  });
 });

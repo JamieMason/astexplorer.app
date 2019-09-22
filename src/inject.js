@@ -3,6 +3,8 @@
 
 const { ipcRenderer } = require('electron');
 
+let reduxStore;
+
 const disableDragAndDrop = () => {
   const { addEventListener } = HTMLElement.prototype;
   Object.defineProperties(HTMLElement.prototype, {
@@ -24,9 +26,16 @@ const disableExitDialog = () => {
   });
 };
 
-const getReduxStore = () =>
-  document.getElementById('container')._reactRootContainer._internalRoot.current
-    .child.memoizedProps.store;
+const exposeMiddleware = () => {
+  window.__AST_EXPLORER_APP_MIDDLEWARE__ = (store) => {
+    reduxStore = store;
+    return (next) => (action) => next(action);
+  };
+};
+
+const setTransform = (id) => {
+  document.querySelector(`[value="${id}"]`).click();
+};
 
 const enableAllTreeOptions = () => {
   [...document.querySelectorAll('.tree-visualization [type="checkbox"]')]
@@ -34,13 +43,7 @@ const enableAllTreeOptions = () => {
     .forEach((el) => el.click());
 };
 
-const setTransform = (id) => {
-  document.querySelector(`[value="${id}"]`).click();
-};
-
-const run = () => {
-  let reduxStore;
-
+const onWindowLoad = () => {
   ipcRenderer.on('source-change-on-disk', (event, sourceData) => {
     reduxStore.dispatch({
       type: 'SET_CODE',
@@ -54,17 +57,16 @@ const run = () => {
       type: 'SET_TRANSFORM',
       code: transformData,
       cursor: 0,
+      enabled: true,
     });
   });
 
   ipcRenderer.send('source-change-in-browser', 'TODO sourceData');
-
-  reduxStore = getReduxStore();
   setTransform('babelv7');
   enableAllTreeOptions();
 };
 
 disableDragAndDrop();
 disableExitDialog();
-
-window.addEventListener('load', run, false);
+exposeMiddleware();
+window.addEventListener('load', onWindowLoad, false);
