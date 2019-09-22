@@ -62,14 +62,14 @@
     "uglify-js": ">=2.6.0"
   },
   "scripts": {
-    "build-upstream": "./scripts/build-upstream.sh",
+    "build-upstream": "yarn clean && ./scripts/build-upstream.sh",
     "clean": "rimraf ./out",
     "electron:make": "electron-forge make",
     "electron:package": "electron-forge package",
     "format": "prettier --write './src/**/*.js'",
     "lint": "eslint src --color",
-    "preelectron:make": "yarn clean",
-    "preelectron:package": "yarn clean",
+    "preelectron:make": "yarn build-upstream",
+    "preelectron:package": "yarn build-upstream",
     "prestart": "yarn build-upstream",
     "pull-upstream": "./scripts/pull-upstream.sh",
     "start": "electron-forge start"

@@ -12,7 +12,7 @@ module.exports = {
     icon: 'assets/icons/mac/astexplorer',
     name: 'ASTExplorer',
     overwrite: true,
-    ignore: ['/scripts', '/static', '/test'],
+    ignore: ['/scripts', '/static', '/vendor/astexplorer/website'],
     packageManager: 'yarn',
   },
   electronInstallerDebian: {
