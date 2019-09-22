@@ -72,6 +72,6 @@
     "preelectron:package": "yarn clean",
     "prestart": "yarn build-upstream",
     "pull-upstream": "./scripts/pull-upstream.sh",
-    "start": "NODE_ENV=development electron-forge start"
+    "start": "electron-forge start"
   }
 }
