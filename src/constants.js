@@ -9,31 +9,30 @@ const ICON_PATH = path.resolve(ROOT, './assets/icons/png/64x64.png');
 const WEBSITE_PATH = path.resolve(ROOT, './vendor/astexplorer/out/index.html');
 
 const DEFAULT_SOURCE = `
-// This is the "Source" Panel. Code which you want to explore the AST of and/or
-// run through a "Transform" (Babel Plugin, ESLint Rule, Codemod etc) goes here.
+// This is the "Source" Panel.
+//
+// Code which you want to explore the AST of and/or run through a "Transform"
+// (Babel Plugin, ESLint Rule, Codemod etc) goes here.
 //
 // The AST of this code is displayed in the panel on the top-right and your
 // Transform goes in the panel below in the bottom-left.
 //
-// You can either paste some source code here, or follow these steps to import
-// a file from disk:
-//
-// 1. Open File > Import Source
-// 2. Browse to a Script file
-// 3. Edit your Source in VS Code, Sublime Text etc
-// 4. Changes will be reloaded automatically
+// Paste some source code here to view its AST.
 
 const reverseMe = 'Hello World';
 `.trimLeft();
 
 const DEFAULT_TRANSFORM = `
-// This is the "Transform" Panel. The result of running this transform over the
-// Source Panel is shown in the panel on the bottom-right.
+// This is the "Transform" Panel.
 //
-// 1. Open File > Import Transform
-// 2. Browse to your Babel Plugin, ESLint Rule, Codemod etc
-// 3. Edit your Transform Script in your IDE
-// 4. Changes will be reloaded here automatically
+// The result of running this transform over the Source Panel is shown in the
+// panel on the bottom-right.
+//
+// 1. Using the "Transform" Menu above, choose your Transform type, such as
+//    Babel Plugin, ESLint Rule, Codemod etc.
+// 2. Use the Open File Dialog to locate your Transform Script.
+// 3. Edit your Transform Script in your IDE.
+// 4. Changes will be reloaded here automatically.
 //
 // Feel free to organise your transform using ES modules and they will be
 // bundled together automatically.
