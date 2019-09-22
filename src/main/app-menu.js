@@ -1,22 +1,6 @@
-const { app, dialog, Menu, shell } = require('electron');
+const { app, Menu, shell } = require('electron');
 
-const createOpenMenuItem = (label, onOpen) => ({
-  label,
-  click() {
-    dialog.showOpenDialog(
-      {
-        properties: ['openFile'],
-        title: label,
-      },
-      ([filePath]) => filePath && onOpen(filePath),
-    );
-  },
-});
-
-export const createMenu = ({
-  onOpenSource = () => {},
-  onOpenTransform = () => {},
-}) => {
+export const create = () => {
   const appMenu = {
     label: app.getName(),
     submenu: [
@@ -29,14 +13,6 @@ export const createMenu = ({
       { role: 'unhide' },
       { type: 'separator' },
       { role: 'quit' },
-    ],
-  };
-
-  const fileMenu = {
-    label: 'File',
-    submenu: [
-      createOpenMenuItem('Import Source', onOpenSource),
-      createOpenMenuItem('Import Transform', onOpenTransform),
     ],
   };
 
@@ -88,13 +64,6 @@ export const createMenu = ({
   };
 
   Menu.setApplicationMenu(
-    Menu.buildFromTemplate([
-      appMenu,
-      fileMenu,
-      editMenu,
-      viewMenu,
-      windowMenu,
-      helpMenu,
-    ]),
+    Menu.buildFromTemplate([appMenu, editMenu, viewMenu, windowMenu, helpMenu]),
   );
 };

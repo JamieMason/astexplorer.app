@@ -1,4 +1,13 @@
-export const defaultSource = `
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..');
+const CLIENT_SCRIPT_PATH = path.resolve(__dirname, './browser/index.js');
+const CSS_PATH = path.resolve(ROOT, './assets/overrides.css');
+const DEFAULT_TRANSFORM_PARSER = 'babelv7';
+const ICON_PATH = path.resolve(ROOT, './assets/icons/png/64x64.png');
+const WEBSITE_PATH = path.resolve(ROOT, './vendor/astexplorer/out/index.html');
+
+const DEFAULT_SOURCE = `
 // This is the "Source" Panel. Code which you want to explore the AST of and/or
 // run through a "Transform" (Babel Plugin, ESLint Rule, Codemod etc) goes here.
 //
@@ -16,7 +25,7 @@ export const defaultSource = `
 const reverseMe = 'Hello World';
 `.trimLeft();
 
-export const defaultTransform = `
+const DEFAULT_TRANSFORM = `
 // This is the "Transform" Panel. The result of running this transform over the
 // Source Panel is shown in the panel on the bottom-right.
 //
@@ -50,3 +59,14 @@ export default (babel) => {
   };
 };
 `.trimLeft();
+
+module.exports = {
+  CLIENT_SCRIPT_PATH,
+  CSS_PATH,
+  DEFAULT_SOURCE,
+  DEFAULT_TRANSFORM_PARSER,
+  DEFAULT_TRANSFORM,
+  ICON_PATH,
+  ROOT,
+  WEBSITE_PATH,
+};

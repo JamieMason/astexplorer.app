@@ -1,6 +1,7 @@
 {
   "extends": "eslint-config-airbnb",
   "rules": {
+    "function-paren-newline": 0,
     "implicit-arrow-linebreak": 0,
     "import/extensions": 0,
     "import/no-extraneous-dependencies": 0,
@@ -8,6 +9,7 @@
     "import/prefer-default-export": 0,
     "linebreak-style": 0,
     "no-console": 0,
+    "no-underscore-dangle": 0,
     "object-curly-newline": 0
   }
 }
