@@ -3,6 +3,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const CLIENT_SCRIPT_PATH = path.resolve(__dirname, './browser/index.js');
 const CSS_PATH = path.resolve(ROOT, './assets/overrides.css');
+const DEFAULT_SOURCE_PARSER = 'babylon7';
 const DEFAULT_TRANSFORM_PARSER = 'babelv7';
 const ICON_PATH = path.resolve(ROOT, './assets/icons/png/64x64.png');
 const WEBSITE_PATH = path.resolve(ROOT, './vendor/astexplorer/out/index.html');
@@ -63,6 +64,7 @@ export default (babel) => {
 module.exports = {
   CLIENT_SCRIPT_PATH,
   CSS_PATH,
+  DEFAULT_SOURCE_PARSER,
   DEFAULT_SOURCE,
   DEFAULT_TRANSFORM_PARSER,
   DEFAULT_TRANSFORM,

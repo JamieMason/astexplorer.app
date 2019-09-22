@@ -1,12 +1,12 @@
 const { ipcRenderer } = require('electron');
+const {
+  DEFAULT_SOURCE_PARSER,
+  DEFAULT_SOURCE,
+  DEFAULT_TRANSFORM_PARSER,
+  DEFAULT_TRANSFORM,
+} = require('../constants');
 const { mainEvents } = require('../event-types');
 const { dispatch } = require('./store');
-
-const enableAllTreeOptions = () => {
-  [...document.querySelectorAll('.tree-visualization [type="checkbox"]')]
-    .filter((el) => !el.checked)
-    .forEach((el) => el.click());
-};
 
 ipcRenderer.on(mainEvents.SET_TRANSFORM_PARSER, (type, id) => {
   document.querySelector(`[value="${id}"]`).click();
@@ -24,4 +24,33 @@ ipcRenderer.on(mainEvents.SET_TRANSFORM_CODE, (type, code) => {
   dispatch({ type: 'SET_TRANSFORM', code, cursor: 0 });
 });
 
-window.addEventListener('load', enableAllTreeOptions, false);
+localStorage.setItem(
+  'tree_settings',
+  JSON.stringify({
+    autofocus: true,
+    hideFunctions: true,
+    hideEmptyKeys: true,
+    hideLocationData: true,
+    hideTypeKeys: true,
+  }),
+);
+
+localStorage.setItem(
+  'explorerSettingsV1',
+  JSON.stringify({
+    showTransformPanel: true,
+    parserSettings: {},
+    parserPerCategory: {
+      javascript: DEFAULT_SOURCE_PARSER,
+    },
+    workbench: {
+      parser: DEFAULT_SOURCE_PARSER,
+      code: DEFAULT_SOURCE,
+      keyMap: 'default',
+      transform: {
+        code: DEFAULT_TRANSFORM,
+        transformer: DEFAULT_TRANSFORM_PARSER,
+      },
+    },
+  }),
+);
