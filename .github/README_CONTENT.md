@@ -8,10 +8,6 @@ Reloading.<br>✅ Work Offline.
 
 <center><img src="./static/screenshot.png?raw=true"></center>
 
-## ⚠️ Status
-
-New Project, there are some kinks to iron out.
-
 ## 🌩 Installation
 
 ### Mac
