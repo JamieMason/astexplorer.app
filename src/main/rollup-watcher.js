@@ -14,9 +14,14 @@ const getBundledSource = async (filePath) => {
 };
 
 export const create = (onChange) => {
-  const watcher = fileWatcher.create((filePath) =>
-    getBundledSource(filePath).then(onChange),
-  );
+  const watcher = fileWatcher.create(async (filePath) => {
+    try {
+      const bundledSource = await getBundledSource(filePath);
+      onChange(bundledSource);
+    } catch (err) {
+      // @TODO: Show Notification
+    }
+  });
   return {
     setFilePath(nextFilePath) {
       return watcher.setFilePath(nextFilePath).then(getBundledSource);
