@@ -15,10 +15,13 @@ npm install astexplorer.app --save
 
 ## Dependencies
 
+- [chalk](https://ghub.io/chalk): Terminal string styling done right
 - [chokidar](https://ghub.io/chokidar): A neat wrapper around node.js fs.watch /
   fs.watchFile / fsevents.
 - [electron-compile](https://ghub.io/electron-compile): Electron supporting
   package to compile JS and CSS in Electron applications
+- [electron-devtools-installer](https://ghub.io/electron-devtools-installer): An
+  easy way to install Dev Tools extensions into Electron applications
 - [electron-squirrel-startup](https://ghub.io/electron-squirrel-startup):
   Default Squirrel.Windows event handler for your Electron apps.
 - [memory-fs](https://ghub.io/memory-fs): A simple in-memory filesystem. Holds
@@ -46,6 +49,7 @@ npm install astexplorer.app --save
   checker for accessibility rules on JSX elements.
 - [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific
   linting rules for ESLint
+- [jscodeshift](https://ghub.io/jscodeshift): A toolkit for JavaScript codemods
 - [rimraf](https://ghub.io/rimraf): A deep deletion module for node (like
   `rm -rf`)
 

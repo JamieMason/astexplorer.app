@@ -1,4 +1,24 @@
-## [0.12.4](https://github.com/JamieMason/astexplorer.app/compare/0.11.4...0.12.4) (2019-08-04)
+## [0.14.7](https://github.com/JamieMason/astexplorer.app/compare/0.14.7...0.14.7) (2019-09-23)
+
+### Bug Fixes
+
+- **app:** skip update if transform has syntax errors
+  ([b221270](https://github.com/JamieMason/astexplorer.app/commit/b221270))
+- **npm:** apply security updates
+  ([6948ec6](https://github.com/JamieMason/astexplorer.app/commit/6948ec6))
+- **npm:** update npm dependencies
+  ([f345bf5](https://github.com/JamieMason/astexplorer.app/commit/f345bf5))
+
+### Features
+
+- **astexplorer:** open files using the transform menu
+  ([de2fe1e](https://github.com/JamieMason/astexplorer.app/commit/de2fe1e)),
+  closes [#2](https://github.com/JamieMason/astexplorer.app/issues/2)
+  [#3](https://github.com/JamieMason/astexplorer.app/issues/3)
+- **astexplorer:** pull latest astexplorer.net
+  ([b50f249](https://github.com/JamieMason/astexplorer.app/commit/b50f249))
+
+## [0.14.7](https://github.com/JamieMason/astexplorer.app/compare/0.11.4...0.14.7) (2019-08-04)
 
 ### Features
 
