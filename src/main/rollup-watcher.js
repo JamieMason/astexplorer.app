@@ -1,9 +1,14 @@
 const rollup = require('rollup');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 const fileWatcher = require('./file-watcher');
 
 const getBundledSource = async (filePath) => {
   let code = '';
-  const bundle = await rollup.rollup({ input: { bundle: filePath } });
+  const bundle = await rollup.rollup({
+    input: { bundle: filePath },
+    plugins: [resolve(), commonjs()],
+  });
   const { output } = await bundle.generate({ format: 'esm' });
   output.forEach((chunkOrAsset) => {
     if (!chunkOrAsset.isAsset) {
