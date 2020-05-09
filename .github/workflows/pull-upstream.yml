@@ -1,0 +1,73 @@
+name: Get Latest Upstream Version
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  get-latest-commit:
+    runs-on: ubuntu-latest
+    outputs:
+      has_changed: ${{ steps.get-latest-commit.outputs.has_changed }}
+      latest_commit: ${{ steps.get-latest-commit.outputs.latest_commit }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Compare Commit Hashes
+        id: get-latest-commit
+        run: |
+          commits_api=https://api.github.com/repos/fkling/astexplorer/commits?per_page=1
+          latest_commit=$(curl -sL $commits_api | jq -r ".[0].sha" | tr -d '[:space:]')
+          last_known_commit=$(cat upstream-latest.txt | tr -d '[:space:]')
+          commit_hash_regex="[0-9a-z]{40}"
+
+          if ! [[ $latest_commit =~ $commit_hash_regex ]]; then
+            echo "Upstream Commit Hash $latest_commit is invalid"
+            exit 1
+          fi
+
+          if ! [[ $last_known_commit =~ $commit_hash_regex ]]; then
+            echo "Local Commit Hash $last_known_commit is invalid"
+            exit 1
+          fi
+
+          if [[ $latest_commit = $last_known_commit ]]; then
+            echo "Commit Hash $last_known_commit is still the newest"
+            exit 0
+          fi
+
+          echo ::set-output name=has_changed::true
+          echo ::set-output name=latest_commit::$latest_commit
+  pull-latest:
+    runs-on: ubuntu-latest
+    needs: get-latest-commit
+    if: needs.get-latest-commit.outputs.has_changed == 'true'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Clone Upstream
+        run: |
+          yarn pull-upstream
+          yarn build-upstream
+          rm .gitignore
+          echo "/node_modules" >> .gitignore
+          echo "/out" >> .gitignore
+          echo "/vendor/astexplorer/website" >> .gitignore
+          latest_commit=${{needs.get-latest-commit.outputs.latest_commit}}
+          echo $latest_commit > upstream-latest.txt
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          commit-message: "feat(astexplorer): pull latest astexplorer.net"
+          committer: Jamie Mason <jamie@foldleft.io>
+          author: Jamie Mason <jamie@foldleft.io>
+          title: "Pull latest astexplorer.net"
+      - name: Check outputs
+        run: |
+          latest_commit=${{needs.get-latest-commit.outputs.latest_commit}}
+          pr_number=${{steps.create-pr.outputs.pr_number}}
+          repo=${{github.repository}}
+          echo "Pull Request: https://github.com/$repo/pull/$pr_number"
+          echo "Latest Commit: https://github.com/fkling/astexplorer/commit/$latest_commit"
