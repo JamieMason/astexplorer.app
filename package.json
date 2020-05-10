@@ -19,6 +19,7 @@
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
+    "commit-release": "1.2.4",
     "electron-forge": "5.2.4",
     "electron-prebuilt-compile": "8.2.0",
     "eslint": "^7",
@@ -64,7 +65,8 @@
   },
   "scripts": {
     "build-upstream": "./scripts/build-upstream.sh",
-    "electron:make": "electron-forge make",
+    "create-release": "./scripts/create-release.sh",
+    "electron:make": "rm -rf ./out && electron-forge make",
     "electron:package": "electron-forge package",
     "format": "prettier --write './src/**/*.js'",
     "lint": "eslint src --color",

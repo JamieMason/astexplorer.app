@@ -105,14 +105,14 @@ More info at [generating-a-distributable-for-your-project].
 1. `git push master --tags`.
 1. Create Application using `yarn run electron:make`.
 1. Create a .zip file from `/out/ASTExplorer-darwin-x64` called
-   `/out/ASTExplorer-darwin-x64-x.x.``.
-1. Rename `/`ut/make/ASTExplorer.dmg`to`/out/make/ASTExplorer-x.x.x.dmg`.
-1. Draft a release a`https://github.com/JamieMason/`stexplorer.app/releases
+   `/out/ASTExplorer-darwin-x64-x.x.`.
+1. Rename `/out/make/ASTExplorer.dmg`to`/out/make/ASTExplorer-x.x.x.dmg`.
+1. Draft a release at https://github.com/JamieMason/astexplorer.app/releases
    called `x.x.x` using tag `x.x.x`.
 1. Include the CHANGELOG entries in the body.
 1. Attach `/out/make/ASTExplorer-x.x.x.dmg` and
-   `/out/ASTExplore`-darwin-x64-x.x.x`.
-1. Publish th` release.
+   `/out/ASTExplorer-darwin-x64-x.x.x`.
+1. Publish the release.
 
 [chokidar]: https://github.com/paulmillr/chokidar
 [generating-a-distributable-for-your-project]:

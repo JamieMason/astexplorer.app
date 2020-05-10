@@ -30,8 +30,6 @@ Transforms in your IDE. <br>✅ Organise them into Modules. <br>✅ Hot Reloadin
 ### Mac
 
 📦
-[ASTExplorer-0.14.7.dmg](https://github.com/JamieMason/astexplorer.app/releases/download/0.14.7/ASTExplorer-0.14.7.dmg)<br>
-📦
 [ASTExplorer-darwin-x64-0.14.7.zip](https://github.com/JamieMason/astexplorer.app/releases/download/0.14.7/ASTExplorer-darwin-x64-0.14.7.zip)
 
 ### Build From Source
