@@ -48,13 +48,10 @@ When a Transform is chosen in the Web UI:
 
 The Web UI used on https://astexplorer.net is pulled from its repository at
 https://github.com/fkling/astexplorer and checked into this repository at
-`/vendor/astexplorer/website`. This Script is run manually.
+`/vendor/astexplorer/website`.
 
-```
-yarn run pull-upstream
-git add ./vendor
-git commit -m 'feat(astexplorer): pull latest astexplorer.net'
-```
+The GitHub Action at `/.github/workflows/pull-upstream.yml` runs once a day and
+creates a pull request if new commits are found.
 
 ## Run App for Development
 
@@ -94,25 +91,11 @@ More info at [generating-a-distributable-for-your-project].
 
 ## Publish a Release
 
-> Where `x.x.x` is seen it should be replaced with the correct version number.
-
-1. `npm install -g commit-release`.
-1. Run `commit-release --no-tag` to update the changelog and update the version
-   in package.json.
-1. Update `/README.md` with the new version number under _Installation_.
-1. Amend the Commit `chore(release): x.x.x` created by `commit-release`.
-1. Tag the commit `x.x.x`.
-1. `git push master --tags`.
-1. Create Application using `yarn run electron:make`.
-1. Create a .zip file from `/out/ASTExplorer-darwin-x64` called
-   `/out/ASTExplorer-darwin-x64-x.x.`.
-1. Rename `/out/make/ASTExplorer.dmg`to`/out/make/ASTExplorer-x.x.x.dmg`.
-1. Draft a release at https://github.com/JamieMason/astexplorer.app/releases
-   called `x.x.x` using tag `x.x.x`.
-1. Include the CHANGELOG entries in the body.
-1. Attach `/out/make/ASTExplorer-x.x.x.dmg` and
-   `/out/ASTExplorer-darwin-x64-x.x.x`.
-1. Publish the release.
+1. Run `yarn create-release` to create a commit with an updated changelog and
+   version number.
+1. If all looks correct, `git push master --tags`.
+1. The GitHub Action at `/.github/workflows/release.yml` will Publish a new
+   Release containing the latest version of the Application for download.
 
 [chokidar]: https://github.com/paulmillr/chokidar
 [generating-a-distributable-for-your-project]:
