@@ -25,3 +25,5 @@ SHORT_HASH=$(echo $LATEST_COMMIT | cut -c1-7)
 BUILD_NOTICE="Build: <a href=\"https:\/\/github.com\/fkling\/astexplorer\/commits\/$SHORT_HASH\">$SHORT_HASH<\/a>"
 
 sed -i '' -e "s/@@COMMIT@@/$BUILD_NOTICE/g" $HTML_FILE
+
+echo $LATEST_COMMIT > upstream-latest.txt

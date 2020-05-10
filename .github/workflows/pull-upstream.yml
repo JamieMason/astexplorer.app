@@ -2,7 +2,7 @@ name: Get Latest Upstream Version
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 0 * * *"
 
 jobs:
   get-latest-commit:
@@ -48,7 +48,6 @@ jobs:
       - name: Clone Upstream
         run: |
           latest_commit=${{needs.get-latest-commit.outputs.latest_commit}}
-          echo $latest_commit > upstream-latest.txt
           yarn pull-upstream $latest_commit
           yarn build-upstream
       - name: Create Pull Request
