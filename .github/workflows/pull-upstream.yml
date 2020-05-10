@@ -47,10 +47,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Clone Upstream
         run: |
-          yarn pull-upstream
-          yarn build-upstream
           latest_commit=${{needs.get-latest-commit.outputs.latest_commit}}
           echo $latest_commit > upstream-latest.txt
+          yarn pull-upstream $latest_commit
+          yarn build-upstream
       - name: Create Pull Request
         id: create-pr
         uses: peter-evans/create-pull-request@v2

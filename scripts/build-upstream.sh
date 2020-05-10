@@ -7,4 +7,4 @@ yarn install
 rm -rf "$UPSTREAM/out"
 mkdir -p "$UPSTREAM/out"
 NODE_ENV=${NODE_ENV:-production}
-yarn exec webpack --mode=$NODE_ENV
+node_modules/.bin/webpack --mode=$NODE_ENV
