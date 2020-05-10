@@ -18,28 +18,28 @@ npm install astexplorer.app --save
 - [chalk](https://ghub.io/chalk): Terminal string styling done right
 - [chokidar](https://ghub.io/chokidar): A neat wrapper around node.js fs.watch /
   fs.watchFile / fsevents.
-- [electron-compile](https://ghub.io/electron-compile): Electron supporting
-  package to compile JS and CSS in Electron applications
 - [electron-devtools-installer](https://ghub.io/electron-devtools-installer): An
   easy way to install Dev Tools extensions into Electron applications
-- [electron-squirrel-startup](https://ghub.io/electron-squirrel-startup):
-  Default Squirrel.Windows event handler for your Electron apps.
 - [memory-fs](https://ghub.io/memory-fs): A simple in-memory filesystem. Holds
   data in a javascript object.
 - [rollup](https://ghub.io/rollup): Next-generation ES module bundler
 
 ## Dev Dependencies
 
+- [@electron-forge/cli](https://ghub.io/@electron-forge/cli): A complete tool
+  for building modern Electron applications
+- [@electron-forge/maker-zip](https://ghub.io/@electron-forge/maker-zip): ZIP
+  maker for Electron Forge
 - [babel-plugin-transform-async-to-generator](https://ghub.io/babel-plugin-transform-async-to-generator):
   Turn async functions into ES2015 generators
 - [babel-preset-env](https://ghub.io/babel-preset-env): A Babel preset for each
   environment.
 - [babel-preset-react](https://ghub.io/babel-preset-react): Babel preset for all
   React plugins.
-- [electron-forge](https://ghub.io/electron-forge): A complete tool for building
-  modern Electron applications
-- [electron-prebuilt-compile](https://ghub.io/electron-prebuilt-compile):
-  electron-prebuilt that automatically understands Babel + React + LESS
+- [commit-release](https://ghub.io/commit-release): Commit and tag a release for
+  a conventional changelog project.
+- [electron](https://ghub.io/electron): Build cross platform desktop apps with
+  JavaScript, HTML, and CSS
 - [eslint](https://ghub.io/eslint): An AST-based pattern checker for JavaScript.
 - [eslint-config-airbnb](https://ghub.io/eslint-config-airbnb): Airbnb&#39;s
   ESLint config, following our styleguide
@@ -50,8 +50,6 @@ npm install astexplorer.app --save
 - [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific
   linting rules for ESLint
 - [jscodeshift](https://ghub.io/jscodeshift): A toolkit for JavaScript codemods
-- [rimraf](https://ghub.io/rimraf): A deep deletion module for node (like
-  `rm -rf`)
 
 ## License
 
