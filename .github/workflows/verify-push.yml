@@ -5,29 +5,24 @@ on: push
 jobs:
   verify:
     runs-on: macos-latest
+    if: startsWith(github.ref, 'refs/tags/') == false
     strategy:
       matrix:
         node-version: [12.x]
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Code Climate Test Reporter
-        uses: aktions/codeclimate-test-reporter@v1
+      - uses: aktions/codeclimate-test-reporter@v1
         with:
           codeclimate-test-reporter-id: ${{secrets.CC_TEST_REPORTER_ID}}
           command: before-build
         continue-on-error: true
-
-      - name: Node.js ${{matrix.node-version}}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node-version}}
       - run: yarn install
       - run: yarn lint
       - run: yarn electron:make
-
-      - name: Teardown Code Climate Test Reporter
-        uses: aktions/codeclimate-test-reporter@v1
+      - uses: aktions/codeclimate-test-reporter@v1
         with:
           codeclimate-test-reporter-id: ${{secrets.CC_TEST_REPORTER_ID}}
           command: after-build
