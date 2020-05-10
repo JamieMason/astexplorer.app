@@ -1,6 +1,13 @@
-import {createSelector} from 'reselect';
 import isEqual from 'lodash.isequal';
 import {getParserByID, getTransformerByID} from '../parsers';
+
+// Our selectors are not computationally expensive so we can just use this
+// implementation.
+function createSelector(deps, f) {
+  return function(state) {
+    return f.apply(this, deps.map(d => d(state)));
+  }
+}
 
 // UI related
 
@@ -70,7 +77,7 @@ export function getKeyMap (state) {
 
 const isCodeDirty = createSelector(
   [getCode, getInitialCode],
-  (code, initialCode) => code !== initialCode
+  (code, initialCode) => code !== initialCode,
 );
 
 // Transform related
@@ -93,12 +100,12 @@ export function showTransformer(state) {
 
 const isTransformDirty = createSelector(
   [getTransformCode, getInitialTransformCode],
-  (code, initialCode) => code !== initialCode
+  (code, initialCode) => code !== initialCode,
 );
 
 export const canFork = createSelector(
   [getRevision],
-  (revision) => !!revision
+  (revision) => !!revision,
 );
 
 const canSaveCode = createSelector(
@@ -106,12 +113,12 @@ const canSaveCode = createSelector(
   (revision, dirty) => (
     !revision || // can always save if there is no revision
     dirty
-  )
+  ),
 );
 
 export const canSaveTransform = createSelector(
   [showTransformer, isTransformDirty],
-  (showTransformer, dirty) => showTransformer && dirty
+  (showTransformer, dirty) => showTransformer && dirty,
 );
 
 const didParserSettingsChange = createSelector(
@@ -126,7 +133,7 @@ const didParserSettingsChange = createSelector(
       )
     )
 
-  }
+  },
 );
 
 export const canSave = createSelector(
@@ -134,5 +141,5 @@ export const canSave = createSelector(
   (revision, canSaveCode, canSaveTransform, didParserSettingsChange) => (
     (canSaveCode || canSaveTransform || didParserSettingsChange) &&
     (!revision || revision.canSave())
-  )
+  ),
 );
