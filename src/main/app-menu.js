@@ -1,6 +1,6 @@
 const { app, Menu, shell } = require('electron');
 
-export const create = () => {
+const create = () => {
   const appMenu = {
     label: app.getName(),
     submenu: [
@@ -67,3 +67,5 @@ export const create = () => {
     Menu.buildFromTemplate([appMenu, editMenu, viewMenu, windowMenu, helpMenu]),
   );
 };
+
+module.exports = { create };

@@ -23,7 +23,7 @@ const installDevtools = (names) => {
 
 app.on('will-quit', dereference);
 
-export const create = async () => {
+const create = async () => {
   if (win) {
     throw new Error('attempt to recreate existing app window');
   }
@@ -50,9 +50,11 @@ export const create = async () => {
   win.webContents.insertCSS(cssOverrides);
 };
 
-export const sendEvent = (name, data) => {
+const sendEvent = (name, data) => {
   if (!win) {
     throw new Error('attempt to send event to missing app window');
   }
   win.webContents.send(name, data);
 };
+
+module.exports = { create, sendEvent };

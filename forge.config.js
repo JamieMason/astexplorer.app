@@ -1,10 +1,4 @@
 module.exports = {
-  makers: [
-    {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
-    },
-  ],
   packagerConfig: {
     icon: 'assets/icons/mac/astexplorer',
     name: 'ASTExplorer',
@@ -12,6 +6,12 @@ module.exports = {
     ignore: ['/scripts', '/static', '/vendor/astexplorer/website'],
     packageManager: 'yarn',
   },
+  makers: [
+    {
+      name: '@electron-forge/maker-zip',
+      platforms: ['darwin'],
+    },
+  ],
   github_repository: {
     owner: 'JamieMason',
     name: 'astexplorer.app',

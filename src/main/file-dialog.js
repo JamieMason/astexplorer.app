@@ -14,7 +14,7 @@ const transformNamesById = {
   tslint: 'TSLint Rule',
 };
 
-export const openTransform = (id) =>
+const openTransform = (id) =>
   new Promise((done) => {
     const transformName = transformNamesById[id] || 'Transform';
     dialog.showOpenDialog(
@@ -28,3 +28,5 @@ export const openTransform = (id) =>
         done(Array.isArray(files) && files.length === 1 ? files[0] : ''),
     );
   });
+
+module.exports = { openTransform };

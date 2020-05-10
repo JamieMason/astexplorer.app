@@ -1,6 +1,6 @@
 const chokidar = require('chokidar');
 
-export const create = (onChange) => {
+const create = (onChange) => {
   let filePath = '';
   let watcher = null;
 
@@ -45,3 +45,5 @@ export const create = (onChange) => {
     stop,
   };
 };
+
+module.exports = { create };

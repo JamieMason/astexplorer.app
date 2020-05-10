@@ -9,19 +9,18 @@
   "dependencies": {
     "chalk": "4.0.0",
     "chokidar": "3.4.0",
-    "electron-compile": "6.4.4",
     "electron-devtools-installer": "3.0.0",
-    "electron-squirrel-startup": "1.0.0",
     "memory-fs": "0.5.0",
     "rollup": "2.9.0"
   },
   "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.51",
+    "@electron-forge/maker-zip": "6.0.0-beta.51",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "commit-release": "1.2.4",
-    "electron-forge": "5.2.4",
-    "electron-prebuilt-compile": "8.2.0",
+    "electron": "8.2.5",
     "eslint": "^7",
     "eslint-config-airbnb": "^18",
     "eslint-plugin-import": "^2",

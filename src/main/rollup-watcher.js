@@ -13,7 +13,7 @@ const getBundledSource = async (filePath) => {
   return code;
 };
 
-export const create = (onChange) => {
+const create = (onChange) => {
   const watcher = fileWatcher.create(async (filePath) => {
     try {
       const bundledSource = await getBundledSource(filePath);
@@ -34,3 +34,5 @@ export const create = (onChange) => {
     },
   };
 };
+
+module.exports = { create };
