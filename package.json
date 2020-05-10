@@ -47,6 +47,21 @@
   "license": "MIT",
   "main": "src/index.js",
   "productName": "AST Explorer",
+  "resolutions": {
+    "semver": ">=4.3.2",
+    "uglify-js": ">=2.6.0",
+    "minimatch": ">=3.0.2",
+    "mime": ">= 1.4.1 < 2.0.0 || >= 2.0.3",
+    "hoek": "> 4.2.0 < 5.0.0 || >= 5.0.3",
+    "constantinople": ">=3.1.1",
+    "lodash": ">=4.17.12",
+    "clean-css": ">=4.1.11",
+    "js-yaml": ">=3.13.1",
+    "mem": ">=4.0.0",
+    "minimist": ">=0.2.1 <1.0.0 || >=1.2.3",
+    "cryptiles": ">=4.1.2",
+    "yargs-parser": ">=13.1.2 <14.0.0 || >=15.0.1 <16.0.0 || >=18.1.2"
+  },
   "scripts": {
     "build-upstream": "./scripts/build-upstream.sh",
     "electron:make": "electron-forge make",
