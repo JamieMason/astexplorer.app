@@ -8,12 +8,12 @@ jobs:
   get-latest-commit:
     runs-on: ubuntu-latest
     outputs:
-      has_changed: ${{ steps.get-latest-commit.outputs.has_changed }}
-      latest_commit: ${{ steps.get-latest-commit.outputs.latest_commit }}
+      has_changed: ${{steps.get-latest-commit.outputs.has_changed}}
+      latest_commit: ${{steps.get-latest-commit.outputs.latest_commit}}
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          token: ${{secrets.REPO_SCOPED_TOKEN}}
       - name: Compare Commit Hashes
         id: get-latest-commit
         run: |
@@ -48,13 +48,14 @@ jobs:
       - name: Clone Upstream
         run: |
           yarn pull-upstream
+          yarn build-upstream
           latest_commit=${{needs.get-latest-commit.outputs.latest_commit}}
           echo $latest_commit > upstream-latest.txt
       - name: Create Pull Request
         id: create-pr
         uses: peter-evans/create-pull-request@v2
         with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          token: ${{secrets.REPO_SCOPED_TOKEN}}
           commit-message: "feat(astexplorer): pull latest astexplorer.net"
           committer: Jamie Mason <jamie@foldleft.io>
           author: Jamie Mason <jamie@foldleft.io>

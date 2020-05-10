@@ -49,15 +49,11 @@
   "main": "src/index.js",
   "productName": "AST Explorer",
   "scripts": {
-    "build-upstream": "yarn clean && ./scripts/build-upstream.sh",
-    "clean": "rimraf ./out",
+    "build-upstream": "./scripts/build-upstream.sh",
     "electron:make": "electron-forge make",
     "electron:package": "electron-forge package",
     "format": "prettier --write './src/**/*.js'",
     "lint": "eslint src --color",
-    "preelectron:make": "yarn build-upstream",
-    "preelectron:package": "yarn build-upstream",
-    "prestart": "yarn build-upstream",
     "pull-upstream": "./scripts/pull-upstream.sh",
     "start": "electron-forge start"
   }
