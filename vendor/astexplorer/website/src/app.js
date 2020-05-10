@@ -4,7 +4,6 @@ import CodeEditorContainer from './containers/CodeEditorContainer';
 import ErrorMessageContainer from './containers/ErrorMessageContainer';
 import GistBanner from './components/GistBanner';
 import LoadingIndicatorContainer from './containers/LoadingIndicatorContainer';
-import PasteDropTargetContainer from './containers/PasteDropTargetContainer';
 import PropTypes from 'prop-types';
 import {publish} from './utils/pubsub.js';
 import React from 'react';
@@ -33,30 +32,28 @@ function resize() {
 }
 
 function App({showTransformer, hasError}) {
-  return (
-    <>
-      <ErrorMessageContainer />
-      <PasteDropTargetContainer id="main" className={cx({hasError})}>
-        <LoadingIndicatorContainer />
-        <SettingsDialogContainer />
-        <ShareDialogContainer />
-        <ToolbarContainer />
-        <GistBanner />
+  return <>
+    <ErrorMessageContainer />
+    <React.Fragment>
+      <LoadingIndicatorContainer />
+      <SettingsDialogContainer />
+      <ShareDialogContainer />
+      <ToolbarContainer />
+      <GistBanner />
+      <SplitPane
+        className="splitpane-content"
+        vertical={true}
+        onResize={resize}>
         <SplitPane
-          className="splitpane-content"
-          vertical={true}
+          className="splitpane"
           onResize={resize}>
-          <SplitPane
-            className="splitpane"
-            onResize={resize}>
-            <CodeEditorContainer />
-            <ASTOutputContainer />
-          </SplitPane>
-          {showTransformer ? <TransformerContainer /> : null}
+          <CodeEditorContainer />
+          <ASTOutputContainer />
         </SplitPane>
-      </PasteDropTargetContainer>
-    </>
-  );
+        {showTransformer ? <TransformerContainer /> : null}
+      </SplitPane>
+    </React.Fragment>
+  </>;
 }
 
 App.propTypes = {
@@ -77,7 +74,11 @@ const store = createStore(
   astexplorer,
   revive(LocalStorage.readState()),
   composeEnhancers(
-    applyMiddleware(snippetMiddleware(storageAdapter), parserMiddleware),
+    applyMiddleware(
+      window.__AST_EXPLORER_APP_MIDDLEWARE__,
+      snippetMiddleware(storageAdapter),
+      parserMiddleware
+    ),
   ),
 );
 store.subscribe(debounce(() => {
@@ -103,10 +104,3 @@ global.onhashchange = () => {
 if (location.hash.length > 1) {
   store.dispatch(loadSnippet());
 }
-
-global.onbeforeunload = () => {
-  const state = store.getState();
-  if (canSaveTransform(state)) {
-    return 'You have unsaved transform code. Do you really want to leave?';
-  }
-};
