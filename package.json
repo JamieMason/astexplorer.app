@@ -7,27 +7,27 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "chalk": "2.4.2",
-    "chokidar": "3.1.1",
+    "chalk": "4.0.0",
+    "chokidar": "3.4.0",
     "electron-compile": "6.4.4",
-    "electron-devtools-installer": "2.2.4",
+    "electron-devtools-installer": "3.0.0",
     "electron-squirrel-startup": "1.0.0",
-    "memory-fs": "0.4.1",
-    "rollup": "1.21.4"
+    "memory-fs": "0.5.0",
+    "rollup": "2.9.0"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "electron-forge": "5.2.4",
-    "electron-prebuilt-compile": "4.0.0",
-    "eslint": "^6",
+    "electron-prebuilt-compile": "8.2.0",
+    "eslint": "^7",
     "eslint-config-airbnb": "^18",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^6",
     "eslint-plugin-react": "^7",
-    "jscodeshift": "0.6.4",
-    "rimraf": "3.0.0"
+    "jscodeshift": "0.9.0",
+    "rimraf": "3.0.2"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
   "keywords": [
@@ -48,19 +48,6 @@
   "license": "MIT",
   "main": "src/index.js",
   "productName": "AST Explorer",
-  "resolutions": {
-    "clean-css": ">=4.1.11",
-    "constantinople": ">=3.1.1",
-    "cryptiles": ">=4.1.2",
-    "hoek": ">=5.0.3",
-    "js-yaml": ">=3.13.1",
-    "lodash": ">=4.17.15",
-    "mem": ">=4.0.0",
-    "mime": ">=2.0.3",
-    "minimatch": ">=3.0.2",
-    "semver": ">=4.3.2",
-    "uglify-js": ">=2.6.0"
-  },
   "scripts": {
     "build-upstream": "yarn clean && ./scripts/build-upstream.sh",
     "clean": "rimraf ./out",
