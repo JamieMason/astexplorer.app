@@ -4,22 +4,20 @@ import CodeEditorContainer from './containers/CodeEditorContainer';
 import ErrorMessageContainer from './containers/ErrorMessageContainer';
 import GistBanner from './components/GistBanner';
 import LoadingIndicatorContainer from './containers/LoadingIndicatorContainer';
+import PasteDropTargetContainer from './containers/PasteDropTargetContainer';
 import PropTypes from 'prop-types';
-import PubSub from 'pubsub-js';
+import {publish} from './utils/pubsub.js';
 import React from 'react';
 import SettingsDialogContainer from './containers/SettingsDialogContainer';
 import ShareDialogContainer from './containers/ShareDialogContainer';
 import SplitPane from './components/SplitPane';
 import ToolbarContainer from './containers/ToolbarContainer';
 import TransformerContainer from './containers/TransformerContainer';
-import createSagaMiddleware from 'redux-saga'
 import debounce from './utils/debounce';
-import saga from './store/sagas';
 import {Provider, connect} from 'react-redux';
 import {astexplorer, persist, revive} from './store/reducers';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {canSaveTransform, getRevision} from './store/selectors';
-import {enableBatching} from 'redux-batched-actions';
 import {loadSnippet} from './store/actions';
 import {render} from 'react-dom';
 import * as gist from './storage/gist';
@@ -27,39 +25,37 @@ import * as parse from './storage/parse';
 import StorageHandler from './storage';
 import '../css/style.css';
 import parserMiddleware from './store/parserMiddleware';
+import snippetMiddleware from './store/snippetMiddleware.js';
+import cx from './utils/classnames.js';
 
 function resize() {
-  PubSub.publish('PANEL_RESIZE');
+  publish('PANEL_RESIZE');
 }
 
-function App(props) {
+function App({showTransformer, hasError}) {
   return (
-    <div>
+    <>
       <ErrorMessageContainer />
-      <div className={'dropTarget' + (props.hasError ? ' hasError' : '')}>
-        <React.Fragment>
-          <LoadingIndicatorContainer />
-          <SettingsDialogContainer />
-          <ShareDialogContainer />
-          <div id="root">
-            <ToolbarContainer />
-            <GistBanner />
-            <SplitPane
-              className="splitpane-content"
-              vertical={true}
-              onResize={resize}>
-              <SplitPane
-                className="splitpane"
-                onResize={resize}>
-                <CodeEditorContainer />
-                <ASTOutputContainer />
-              </SplitPane>
-              {props.showTransformer ? <TransformerContainer /> : null}
-            </SplitPane>
-          </div>
-        </React.Fragment>
-      </div>
-    </div>
+      <PasteDropTargetContainer id="main" className={cx({hasError})}>
+        <LoadingIndicatorContainer />
+        <SettingsDialogContainer />
+        <ShareDialogContainer />
+        <ToolbarContainer />
+        <GistBanner />
+        <SplitPane
+          className="splitpane-content"
+          vertical={true}
+          onResize={resize}>
+          <SplitPane
+            className="splitpane"
+            onResize={resize}>
+            <CodeEditorContainer />
+            <ASTOutputContainer />
+          </SplitPane>
+          {showTransformer ? <TransformerContainer /> : null}
+        </SplitPane>
+      </PasteDropTargetContainer>
+    </>
   );
 }
 
@@ -72,17 +68,17 @@ const AppContainer = connect(
   state => ({
     showTransformer: state.showTransformPanel,
     hasError: !!state.error,
-  })
+  }),
 )(App);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const sagaMiddleware = createSagaMiddleware();
+const storageAdapter = new StorageHandler([gist, parse]);
 const store = createStore(
-  enableBatching(astexplorer),
+  astexplorer,
   revive(LocalStorage.readState()),
   composeEnhancers(
-    applyMiddleware(window.__AST_EXPLORER_APP_MIDDLEWARE__, sagaMiddleware, parserMiddleware)
-  )
+    applyMiddleware(snippetMiddleware(storageAdapter), parserMiddleware),
+  ),
 );
 store.subscribe(debounce(() => {
   const state = store.getState();
@@ -91,14 +87,13 @@ store.subscribe(debounce(() => {
     LocalStorage.writeState(persist(state));
   }
 }));
-sagaMiddleware.run(saga, new StorageHandler([gist, parse]));
 store.dispatch({type: 'INIT'});
 
 render(
   <Provider store={store}>
     <AppContainer />
   </Provider>,
-  document.getElementById('container')
+  document.getElementById('container'),
 );
 
 global.onhashchange = () => {
@@ -108,3 +103,10 @@ global.onhashchange = () => {
 if (location.hash.length > 1) {
   store.dispatch(loadSnippet());
 }
+
+global.onbeforeunload = () => {
+  const state = store.getState();
+  if (canSaveTransform(state)) {
+    return 'You have unsaved transform code. Do you really want to leave?';
+  }
+};
