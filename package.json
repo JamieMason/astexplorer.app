@@ -20,7 +20,7 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "commit-release": "1.2.4",
-    "electron": "8.2.5",
+    "electron": "8.5.1",
     "eslint": "^7",
     "eslint-config-airbnb": "^18",
     "eslint-plugin-import": "^2",
