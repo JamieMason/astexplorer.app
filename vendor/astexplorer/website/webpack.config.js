@@ -124,6 +124,14 @@ module.exports = Object.assign({
   module: {
     rules: [
       {
+        test: [
+          /\/@typescript-eslint\/.*\/CLIEngine/,
+          /\/@typescript-eslint\/.*\/globby/,
+          /\.d\.ts$/,
+        ],
+        use: 'null-loader',
+      },
+      {
         test: /\.txt$/,
         exclude: /node_modules/,
         loader: 'raw-loader',
@@ -142,6 +150,7 @@ module.exports = Object.assign({
           path.join(__dirname, 'node_modules', '@glimmer', 'util', 'dist'),
           path.join(__dirname, 'node_modules', '@glimmer', 'wire-format', 'dist'),
           path.join(__dirname, 'node_modules', 'ast-types'),
+          path.join(__dirname, 'node_modules', '@babel/eslint-parser'),
           path.join(__dirname, 'node_modules', 'babel-eslint'),
           path.join(__dirname, 'node_modules', 'babel-eslint8'),
           path.join(__dirname, 'node_modules', 'jsesc'),
@@ -163,6 +172,7 @@ module.exports = Object.assign({
           path.join(__dirname, 'node_modules', 'redux', 'es'),
           path.join(__dirname, 'node_modules', 'regexp-tree'),
           path.join(__dirname, 'node_modules', 'regjsparser'),
+          path.join(__dirname, 'node_modules', 'regexpp'),
           path.join(__dirname, 'node_modules', 'simple-html-tokenizer'),
           path.join(__dirname, 'node_modules', 'symbol-observable', 'es'),
           path.join(__dirname, 'node_modules', 'typescript-eslint-parser'),
@@ -216,8 +226,6 @@ module.exports = Object.assign({
     noParse: [
       /traceur\/bin/,
       /typescript\/lib/,
-      /acorn\/dist\/acorn\.js/,
-      /acorn\/dist\/acorn\.mjs/,
       /esprima\/dist\/esprima\.js/,
       /esprima-fb\/esprima\.js/,
       // This is necessary because flow is trying to load the 'fs' module, but
