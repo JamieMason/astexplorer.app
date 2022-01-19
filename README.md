@@ -5,6 +5,15 @@
 [![Build Status](http://img.shields.io/travis/JamieMason/ASTExplorer.app/master.svg?style=flat-square)](https://travis-ci.org/JamieMason/ASTExplorer.app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d1475b03168b4d3598cf/maintainability)](https://codeclimate.com/github/JamieMason/ASTExplorer.app/maintainability)
 
+## Status
+
+I've not had much time to work on this in the last few years, some usability improvements 
+are needed and it would be good to have the app automatically update. The tooling for 
+bundling and hot reloading are all JavaScript based so that functionality is only available
+for languages they support.
+
+Please open issues for anything else you notice.
+
 ## Table of Contents
 
 - [📣 Summary](#-summary)
