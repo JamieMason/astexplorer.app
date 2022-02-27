@@ -7,26 +7,26 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "chalk": "4.0.0",
-    "chokidar": "3.4.0",
-    "electron-devtools-installer": "3.0.0",
+    "chalk": "4.1.2",
+    "chokidar": "3.5.3",
+    "electron-devtools-installer": "3.2.0",
     "memory-fs": "0.5.0",
-    "rollup": "2.9.0"
+    "rollup": "2.68.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "6.0.0-beta.51",
-    "@electron-forge/maker-zip": "6.0.0-beta.51",
+    "@electron-forge/cli": "6.0.0-beta.63",
+    "@electron-forge/maker-zip": "6.0.0-beta.63",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "commit-release": "1.2.4",
-    "electron": "8.2.5",
-    "eslint": "^7",
-    "eslint-config-airbnb": "^18",
+    "electron": "17.1.0",
+    "eslint": "^8",
+    "eslint-config-airbnb": "^19",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^6",
     "eslint-plugin-react": "^7",
-    "jscodeshift": "0.9.0"
+    "jscodeshift": "0.13.1"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
   "keywords": [
@@ -48,19 +48,7 @@
   "main": "src/index.js",
   "productName": "AST Explorer",
   "resolutions": {
-    "semver": ">=4.3.2",
-    "uglify-js": ">=2.6.0",
-    "minimatch": ">=3.0.2",
-    "mime": ">= 1.4.1 < 2.0.0 || >= 2.0.3",
-    "hoek": "> 4.2.0 < 5.0.0 || >= 5.0.3",
-    "constantinople": ">=3.1.1",
-    "lodash": ">=4.17.12",
-    "clean-css": ">=4.1.11",
-    "js-yaml": ">=3.13.1",
-    "mem": ">=4.0.0",
-    "minimist": ">=0.2.1 <1.0.0 || >=1.2.3",
-    "cryptiles": ">=4.1.2",
-    "yargs-parser": ">=13.1.2 <14.0.0 || >=15.0.1 <16.0.0 || >=18.1.2"
+    "chalk": "4.1.2"
   },
   "scripts": {
     "build-upstream": "./scripts/build-upstream.sh",
