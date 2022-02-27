@@ -14,19 +14,20 @@ const transformNamesById = {
   tslint: 'TSLint Rule',
 };
 
-const openTransform = (id) =>
-  new Promise((done) => {
-    const transformName = transformNamesById[id] || 'Transform';
-    dialog.showOpenDialog(
-      {
-        buttonLabel: `Open ${transformName}`,
-        filters: [{ extensions: ['js', 'ts'], name: 'JavaScript' }],
-        message: `Open ${transformName}`,
-        properties: ['openFile'],
-      },
-      (files) =>
-        done(Array.isArray(files) && files.length === 1 ? files[0] : ''),
-    );
-  });
+const openTransform = (id) => {
+  const transformName = transformNamesById[id] || 'Transform';
+  return dialog
+    .showOpenDialog({
+      buttonLabel: `Open ${transformName}`,
+      filters: [{ extensions: ['js', 'ts'], name: 'JavaScript' }],
+      message: `Open ${transformName}`,
+      properties: ['openFile'],
+    })
+    .then(({ canceled, filePaths }) => {
+      return Array.isArray(filePaths) && filePaths.length === 1
+        ? filePaths[0]
+        : '';
+    });
+};
 
 module.exports = { openTransform };

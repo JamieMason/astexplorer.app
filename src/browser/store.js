@@ -24,8 +24,10 @@ const withoutCircularRefs = (action) => {
       transformer: {
         category: {
           ...action.transformer,
-          loadTransformer: '<<function>>',
-          transform: '<<function>>',
+          _promise: '<<removed>>',
+          formatCodeExample: '<<removed>>',
+          loadTransformer: '<<removed>>',
+          transform: '<<removed>>',
         },
       },
     };
@@ -38,10 +40,14 @@ window.__AST_EXPLORER_APP_MIDDLEWARE__ = (_store) => {
   ipcRenderer.send(browserEvents.REDUX_STORE_CREATED);
   return (next) => (action) => {
     if (action.origin !== 'main') {
-      ipcRenderer.send(
-        browserEvents.REDUX_ACTION_DISPATCHED,
-        withoutCircularRefs(action),
-      );
+      try {
+        ipcRenderer.send(
+          browserEvents.REDUX_ACTION_DISPATCHED,
+          withoutCircularRefs(action),
+        );
+      } catch (err) {
+        console.error('Could not dispatch', action, err);
+      }
     }
     return next(action);
   };

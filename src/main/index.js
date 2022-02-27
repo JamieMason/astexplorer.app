@@ -17,7 +17,8 @@ app.on('ready', async () => {
 
   ipcMain.on(browserEvents.REDUX_ACTION_DISPATCHED, async (event, action) => {
     if (action && action.type === 'SELECT_TRANSFORMER') {
-      const filePath = await fileDialog.openTransform(action.transformer.id);
+      const transformId = action.transformer.category.id;
+      const filePath = await fileDialog.openTransform(transformId);
       if (!filePath) return;
       const sourceCode = await transformWatcher.setFilePath(filePath);
       appWindow.sendEvent(mainEvents.SET_TRANSFORM_CODE, sourceCode);
