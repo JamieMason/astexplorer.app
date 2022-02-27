@@ -1,3 +1,4 @@
+astexplorer.app-*.tgz
 dist
 node_modules
 out

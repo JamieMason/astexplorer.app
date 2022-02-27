@@ -1,18 +1,9 @@
 # ASTExplorer.app
 
-> <https://astexplorer.net> with ES Modules support and Hot Reloading
+> https://astexplorer.net with ES Modules support and Hot Reloading
 
 [![Build Status](http://img.shields.io/travis/JamieMason/ASTExplorer.app/master.svg?style=flat-square)](https://travis-ci.org/JamieMason/ASTExplorer.app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d1475b03168b4d3598cf/maintainability)](https://codeclimate.com/github/JamieMason/ASTExplorer.app/maintainability)
-
-## Status
-
-I've not had much time to work on this in the last few years, some usability improvements 
-are needed and it would be good to have the app automatically update. The tooling for 
-bundling and hot reloading are all JavaScript based so that functionality is only available
-for languages they support.
-
-Please open issues for anything else you notice.
 
 ## Table of Contents
 
@@ -36,35 +27,30 @@ Transforms in your IDE. <br>✅ Organise them into Modules. <br>✅ Hot Reloadin
 
 ## 🌩 Installation
 
-### Mac
-
-📦
-[ASTExplorer-darwin-x64-0.16.11.zip](https://github.com/JamieMason/astexplorer.app/releases/download/0.16.11/ASTExplorer-darwin-x64-0.16.11.zip)
-
-### Build From Source
-
 ```
-git clone https://github.com/JamieMason/astexplorer.app.git astexplorer-app
-cd astexplorer-app
-yarn install
-yarn start
+npm install -g astexplorer.app
 ```
 
 ## 🕹 Usage
 
+Run `astexplorer` from the Command Line to launch the App.
+
+When using the UI:
+
 1. Mouse over the **Transform** Menu at the top of AST Explorer.
-1. Select [Babel Plugin], [ESLint Rule], [Codemod] etc.
+1. Select [jscodeshift], [babelv7], [typescript] etc.
 1. Find and open your Transform Script on your machine.
+1. Paste some code to transform in the top left panel.
+1. Edit your Transform Script in your IDE.
+1. Changes will be reloaded automatically in AST Explorer.
+1. Organise your transform using [JavaScript Modules] and they will be bundled
+   together and loaded into AST Explorer automatically.
 
-You can now edit your Transform Script in your IDE, such as [VS Code] and
-changes will be reloaded automatically in AST Explorer. Organise your transform
-using [JavaScript Modules] and they will be bundled together automatically.
-
-[babel plugin]: https://babeljs.io/docs/en/plugins#plugin-development
-[codemod]: https://github.com/facebook/jscodeshift
-[eslint rule]: https://eslint.org/docs/developer-guide/working-with-rules
+[babelv7]: https://eslint.org/docs/developer-guide/working-with-rules
 [javascript modules]:
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+[jscodeshift]: https://github.com/facebook/jscodeshift
+[typescript]: https://www.typescriptlang.org/
 [vs code]: https://code.visualstudio.com
 
 ## 🙋🏿‍♂️ Getting Help
