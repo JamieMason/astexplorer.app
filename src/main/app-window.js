@@ -34,7 +34,11 @@ const create = async () => {
     center: true,
     height,
     icon: ICON_PATH,
-    webPreferences: { nodeIntegration: true, preload: CLIENT_SCRIPT_PATH },
+    webPreferences: {
+      contextIsolation: false,
+      nodeIntegration: true,
+      preload: CLIENT_SCRIPT_PATH,
+    },
     width,
   });
 
