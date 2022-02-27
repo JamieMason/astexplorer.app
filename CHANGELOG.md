@@ -1,3 +1,10 @@
+## [0.18.17](https://github.com/JamieMason/astexplorer.app/compare/0.18.16...0.18.17) (2022-02-27)
+
+### Bug Fixes
+
+- **launcher:** fix path to global install
+  ([14c58c7](https://github.com/JamieMason/astexplorer.app/commit/14c58c70bf16b5122a9b4b96ffb2c3c86e04f72e))
+
 ## [0.18.16](https://github.com/JamieMason/astexplorer.app/compare/0.16.11...0.18.16) (2022-02-27)
 
 ### Bug Fixes
