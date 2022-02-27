@@ -4,6 +4,7 @@ import CodeEditorContainer from './containers/CodeEditorContainer';
 import ErrorMessageContainer from './containers/ErrorMessageContainer';
 import GistBanner from './components/GistBanner';
 import LoadingIndicatorContainer from './containers/LoadingIndicatorContainer';
+import PasteDropTargetContainer from './containers/PasteDropTargetContainer';
 import PropTypes from 'prop-types';
 import {publish} from './utils/pubsub.js';
 import * as React from 'react';
@@ -33,28 +34,30 @@ function resize() {
 }
 
 function App({showTransformer, hasError}) {
-  return <>
-    <ErrorMessageContainer />
-    <React.Fragment>
-      <LoadingIndicatorContainer />
-      <SettingsDialogContainer />
-      <ShareDialogContainer />
-      <ToolbarContainer />
-      <GistBanner />
-      <SplitPane
-        className="splitpane-content"
-        vertical={true}
-        onResize={resize}>
+  return (
+    <>
+      <ErrorMessageContainer />
+      <PasteDropTargetContainer id="main" className={cx({hasError})}>
+        <LoadingIndicatorContainer />
+        <SettingsDialogContainer />
+        <ShareDialogContainer />
+        <ToolbarContainer />
+        <GistBanner />
         <SplitPane
-          className="splitpane"
+          className="splitpane-content"
+          vertical={true}
           onResize={resize}>
-          <CodeEditorContainer />
-          <ASTOutputContainer />
+          <SplitPane
+            className="splitpane"
+            onResize={resize}>
+            <CodeEditorContainer />
+            <ASTOutputContainer />
+          </SplitPane>
+          {showTransformer ? <TransformerContainer /> : null}
         </SplitPane>
-        {showTransformer ? <TransformerContainer /> : null}
-      </SplitPane>
-    </React.Fragment>
-  </>;
+      </PasteDropTargetContainer>
+    </>
+  );
 }
 
 App.propTypes = {

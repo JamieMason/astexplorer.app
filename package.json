@@ -10,22 +10,23 @@
     "chalk": "4.1.2",
     "chokidar": "3.5.3",
     "electron-devtools-installer": "3.2.0",
-    "memory-fs": "0.5.0",
-    "rollup": "2.68.0"
+    "rollup": "2.68.0",
+    "rollup-plugin-typescript2": "0.31.2",
+    "ttypescript": "1.5.13",
+    "typescript": "4.5.5"
   },
   "devDependencies": {
     "@electron-forge/cli": "6.0.0-beta.63",
     "@electron-forge/maker-zip": "6.0.0-beta.63",
+    "@types/chokidar": "2.1.3",
+    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/parser": "5.12.1",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
-    "commit-release": "1.2.4",
     "electron": "17.1.0",
-    "eslint": "^8",
-    "eslint-config-airbnb": "^19",
-    "eslint-plugin-import": "^2",
-    "eslint-plugin-jsx-a11y": "^6",
-    "eslint-plugin-react": "^7",
+    "eslint": "8.10.0",
+    "eslint-plugin-import": "2.25.4",
     "jscodeshift": "0.13.1"
   },
   "homepage": "https://github.com/JamieMason/astexplorer.app#readme",
@@ -42,22 +43,23 @@
     "javascript",
     "jscodeshift",
     "parser",
-    "postcss"
+    "postcss",
+    "transforms",
+    "typescript"
   ],
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "productName": "AST Explorer",
   "resolutions": {
     "chalk": "4.1.2"
   },
   "scripts": {
-    "build-upstream": "./scripts/build-upstream.sh",
-    "create-release": "./scripts/create-release.sh",
-    "electron:make": "rm -rf ./out && electron-forge make",
-    "electron:package": "electron-forge package",
-    "format": "prettier --write './src/**/*.js'",
-    "lint": "eslint src --color",
-    "pull-upstream": "./scripts/pull-upstream.sh",
-    "start": "electron-forge start"
+    "build": "rm -rf dist && tsc",
+    "format": "prettier --write './src/**/*.*'",
+    "lint": "eslint src",
+    "start": "electron-forge start",
+    "upstream:build": "./scripts/build-upstream.sh",
+    "upstream:pull": "./scripts/pull-upstream.sh",
+    "upstream:update": "yarn upstream:pull && upstream:build"
   }
 }

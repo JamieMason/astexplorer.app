@@ -10,7 +10,7 @@ rm -rf "./astexplorer"
 # apply patches
 HTML_FILE="./vendor/astexplorer/website/index.ejs"
 ENTRY_FILE="./vendor/astexplorer/website/src/app.js"
-DISABLE_DRAG_AND_DROP="./scripts/transforms/disable-drag-and-drop.js"
+# DISABLE_DRAG_AND_DROP="./scripts/transforms/disable-drag-and-drop.js"
 DISABLE_EXIT_DIALOG="./scripts/transforms/disable-exit-dialog.js"
 INSERT_MIDDLEWARE="./scripts/transforms/insert-middleware.js"
 

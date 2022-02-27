@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"]
+}
