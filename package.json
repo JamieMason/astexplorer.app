@@ -17,17 +17,12 @@
     "electron-devtools-installer": "3.2.0",
     "rollup": "2.68.0",
     "rollup-plugin-typescript2": "0.31.2",
-    "ttypescript": "1.5.13",
     "typescript": "4.5.5"
   },
   "devDependencies": {
-    "@electron-forge/maker-zip": "6.0.0-beta.63",
     "@types/chokidar": "2.1.3",
     "@typescript-eslint/eslint-plugin": "5.12.1",
     "@typescript-eslint/parser": "5.12.1",
-    "babel-plugin-transform-async-to-generator": "6.24.1",
-    "babel-preset-env": "1.7.0",
-    "babel-preset-react": "6.24.1",
     "electron": "17.1.0",
     "eslint": "8.10.0",
     "eslint-plugin-import": "2.25.4",
