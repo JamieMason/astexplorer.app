@@ -1,3 +1,4 @@
+import path from 'path';
 import * as rollup from 'rollup';
 import tsPlugin from 'rollup-plugin-typescript2';
 import { createFileWatcher } from './file-watcher';
@@ -11,6 +12,7 @@ const getBundledSource = async (filePath: string) => {
     },
     plugins: [
       tsPlugin({
+        cwd: path.dirname(filePath),
         tsconfigOverride: {
           compilerOptions: {
             module: 'ESNext',
@@ -21,6 +23,10 @@ const getBundledSource = async (filePath: string) => {
   });
   const build: rollup.RollupOutput = await bundle.generate({
     format: 'esm',
+    globals: {
+      ts: 'typescript',
+      typescript: 'typescript',
+    },
   });
   build.output.forEach((chunkOrAsset) => {
     if ('code' in chunkOrAsset && chunkOrAsset.code) {
