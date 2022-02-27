@@ -31,6 +31,10 @@ export function showSettingsDialog(state) {
   return state.showSettingsDialog;
 }
 
+export function showSettingsDrawer(state) {
+  return state.showSettingsDrawer;
+}
+
 export function showShareDialog(state) {
   return state.showShareDialog;
 }
@@ -92,6 +96,10 @@ export function getInitialTransformCode(state) {
 
 export function getTransformer(state) {
   return getTransformerByID(state.workbench.transform.transformer);
+}
+
+export function getTransformResult(state) {
+  return state.workbench.transform.transformResult;
 }
 
 export function showTransformer(state) {

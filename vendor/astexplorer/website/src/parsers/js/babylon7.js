@@ -2,38 +2,31 @@ import defaultParserInterface from './utils/defaultESTreeParserInterface';
 import pkg from 'babylon7/package.json';
 
 const availablePlugins = [
-  // From https://babeljs.io/docs/en/next/babel-parser.html
-
   // Miscellaneous
+  // https://babeljs.io/docs/en/babel-parser.html#miscellaneous
   'estree',
 
   // Language extensions
+  // https://babeljs.io/docs/en/babel-parser.html#language-extensions
   'flow',
   'flowComments',
   'jsx',
   'typescript',
+  'v8intrinsic',
 
   // ECMAScript Proposals
-  'asyncGenerators',
-  'bigInt',
-  'classProperties',
-  'classPrivateProperties',
-  'classPrivateMethods',
+  // https://babeljs.io/docs/en/babel-parser.html#ecmascript-proposalshttpsgithubcombabelproposals
+  'asyncDoExpressions',
+  'decimal',
   'decorators',
   'doExpressions',
-  'dynamicImport',
   'exportDefaultFrom',
-  'exportNamespaceFrom',
   'functionBind',
-  'functionSent',
-  'importMeta',
-  'logicalAssignment',
-  'nullishCoalescingOperator',
-  'numericSeparator',
-  'objectRestSpread',
-  'optionalCatchBinding',
-  'optionalChaining',
+  'importAssertions',
+  'moduleBlocks',
+  'partialApplication',
   'pipelineOperator',
+  'recordAndTuple',
   'throwExpressions',
 ];
 
@@ -42,32 +35,28 @@ export const defaultOptions = {
   sourceType: 'module',
   allowImportExportEverywhere: false,
   allowReturnOutsideFunction: false,
+  createParenthesizedExpressions: false,
   ranges: false,
   tokens: false,
   plugins: [
-    'asyncGenerators',
-    'classProperties',
     'decorators',
     'doExpressions',
-    'exportExtensions',
+    'exportDefaultFrom',
     'flow',
-    'functionSent',
     'functionBind',
+    'importAssertions',
     'jsx',
-    'objectRestSpread',
-    'dynamicImport',
-    'nullishCoalescingOperator',
-    'numericSeparator',
-    'optionalChaining',
-    'optionalCatchBinding',
   ],
+  pipelineOptions: { proposal: 'hack', hackTopicToken: '%' },
 };
 
 export const parserSettingsConfiguration = {
   fields: [
-    ['sourceType', ['module', 'script']],
+    ['sourceType', ['module', 'script', 'unambiguous']],
     'allowReturnOutsideFunction',
     'allowImportExportEverywhere',
+    'createParenthesizedExpressions',
+    'errorRecovery',
     'ranges',
     'tokens',
     {
@@ -80,6 +69,15 @@ export const parserSettingsConfiguration = {
         {},
       ),
     },
+    {
+      key: 'pipelineOptions',
+      title: 'Pipeline Operator Options',
+      fields: [
+        ['proposal', ['minimal', 'smart', 'hack', 'fsharp']],
+        ['hackTopicToken', ['%', '#', '^']],
+      ],
+      settings: settings => settings.pipelineOptions || defaultOptions.pipelineOptions,
+    },
   ],
 };
 
@@ -87,7 +85,7 @@ export default {
   ...defaultParserInterface,
 
   id: ID,
-  displayName: ID,
+  displayName: '@babel/parser',
   version: pkg.version,
   homepage: pkg.homepage,
   locationProps: new Set(['range', 'loc', 'start', 'end']),
@@ -98,14 +96,22 @@ export default {
 
   parse(babylon, code, options) {
     options = {...options};
-    // TODO: Make decoratorsBeforeExport settable through settings somhow
-    // TODO: Make pipelineOperator.proposal settable through settings somhow
+    // Older versions didn't have the pipelineOptions setting, but
+    // only a pipelineProposal string option.
+    const { pipelineOptions = {proposal: options.pipelineProposal} } = options;
+    // TODO: Make decoratorsBeforeExport settable through settings somehow
+    // TODO: Make recordAndTuple.syntaxType settable through settings somehow
     options.plugins = options.plugins.map(plugin => {
       switch (plugin) {
         case 'decorators':
           return ['decorators', {decoratorsBeforeExport: false}];
         case 'pipelineOperator':
-          return ['pipelineOperator', {proposal: 'minimal'}];
+          return ['pipelineOperator', {
+            proposal: pipelineOptions.proposal,
+            topicToken: pipelineOptions.hackTopicToken,
+          }];
+        case 'recordAndTuple':
+          return ['recordAndTuple', { syntaxType: 'hash' }];
         default:
           return plugin;
       }

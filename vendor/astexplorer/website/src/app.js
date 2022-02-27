@@ -6,7 +6,7 @@ import GistBanner from './components/GistBanner';
 import LoadingIndicatorContainer from './containers/LoadingIndicatorContainer';
 import PropTypes from 'prop-types';
 import {publish} from './utils/pubsub.js';
-import React from 'react';
+import * as React from 'react';
 import SettingsDialogContainer from './containers/SettingsDialogContainer';
 import ShareDialogContainer from './containers/ShareDialogContainer';
 import SplitPane from './components/SplitPane';
@@ -25,6 +25,7 @@ import StorageHandler from './storage';
 import '../css/style.css';
 import parserMiddleware from './store/parserMiddleware';
 import snippetMiddleware from './store/snippetMiddleware.js';
+import transformerMiddleware from './store/transformerMiddleware';
 import cx from './utils/classnames.js';
 
 function resize() {
@@ -77,7 +78,8 @@ const store = createStore(
     applyMiddleware(
       window.__AST_EXPLORER_APP_MIDDLEWARE__,
       snippetMiddleware(storageAdapter),
-      parserMiddleware
+      parserMiddleware,
+      transformerMiddleware
     ),
   ),
 );
