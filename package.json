@@ -1,7 +1,7 @@
 {
   "name": "astexplorer.app",
   "description": "https://astexplorer.net with ES Modules support and Hot Reloading",
-  "version": "0.16.11",
+  "version": "0.18.16",
   "author": "Jamie Mason <jamie@foldleft.io> (https://github.com/JamieMason)",
   "bin": {
     "astexplorer": "bin/astexplorer.sh"

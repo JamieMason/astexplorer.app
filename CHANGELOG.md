@@ -1,3 +1,25 @@
+## [0.18.16](https://github.com/JamieMason/astexplorer.app/compare/0.16.11...0.18.16) (2022-02-27)
+
+### Bug Fixes
+
+- **electron:** fix breaking changes
+  ([fcab38f](https://github.com/JamieMason/astexplorer.app/commit/fcab38fdb28318380a108a2551a5894ce9ac8cc4))
+- **electron:** run middleware in browser context
+  ([ffaeaf6](https://github.com/JamieMason/astexplorer.app/commit/ffaeaf67f963414df17b4a79549f385f920683c2))
+- **npm:** update dependencies
+  ([591db15](https://github.com/JamieMason/astexplorer.app/commit/591db159e624d1c9ba4d2c25d88642f13537f8ab))
+- **redux:** remove circular refs from actions
+  ([25cb8d2](https://github.com/JamieMason/astexplorer.app/commit/25cb8d282423fbcd27a68db7ebe56b7a1433aa0e))
+- **rollup:** fix ts plugin warnings when choosing transform
+  ([93f8330](https://github.com/JamieMason/astexplorer.app/commit/93f8330c0a5a386fc612e8e13158434e30bf2316))
+
+### Features
+
+- **npm:** publish as npm package
+  ([1f94203](https://github.com/JamieMason/astexplorer.app/commit/1f94203cc27dd37e1ff69427987bb73265468566))
+- **typescript:** add typescript support
+  ([d7f64fb](https://github.com/JamieMason/astexplorer.app/commit/d7f64fb074963f47f1c3267601399aedefe2fd66))
+
 ## [0.16.11](https://github.com/JamieMason/astexplorer.app/compare/0.14.7...0.16.11) (2020-05-10)
 
 ### Bug Fixes
